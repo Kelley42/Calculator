@@ -17,6 +17,10 @@ body {
 
 #display-field {
     border: solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 94vw;
     height: 22vh;
     max-width: 400px;
@@ -24,16 +28,21 @@ body {
 
 #problem-field {
     border: dashed green;
-    width: 94vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 88vw;
     height: 12vh;
-    max-width: 400px;
+    max-width: 380px;
+    padding: 0 20px 0 0;
 }
 
 #working-answer-field {
     border: dashed orange;
-    width: 94vw;
+    width: 88vw;
     height: 8vh;
-    max-width: 400px;
+    max-width: 380px;
+    padding: 10px;
 }
 
 #in-between-field {
