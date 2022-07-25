@@ -25,14 +25,14 @@ body {
 #problem-field {
     border: dashed green;
     width: 94vw;
-    height: 10vh;
+    height: 12vh;
     max-width: 400px;
 }
 
 #working-answer-field {
     border: dashed orange;
     width: 94vw;
-    height: 10vh;
+    height: 8vh;
     max-width: 400px;
 }
 
