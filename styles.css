@@ -1,45 +1,72 @@
+html {
+    border: solid green;
+    display: flex;
+    justify-content: center;
+}
 body {
     background-color: rgb(217, 235, 247);
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 94vw;
-    height: 90vh;
+    height: 95vh;
+    max-width: 400px;
+    /* border: solid blue; */
 }
 
 #display-field {
     border: solid red;
     width: 94vw;
     height: 22vh;
+    max-width: 400px;
 }
 
 #problem-field {
     border: dashed green;
     width: 94vw;
     height: 10vh;
+    max-width: 400px;
 }
 
 #working-answer-field {
     border: dashed orange;
     width: 94vw;
     height: 10vh;
+    max-width: 400px;
 }
 
 #in-between-field {
     border: solid grey;
     width: 94vw;
-    height: 5vh;
+    height: 6vh;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: flex-end;
+    max-width: 400px;
 }
 
 #backspace-row {
     border: dashed blue;
-    width: 94vw;
+    width: 90vw;
     height: 5vh;
     display: flex;
     justify-content: end;
-    align-items: flex-end;
+    align-items: center;
+    max-width: 400px;
+}
+
+#backspace {
+    border: solid green;
+    width: 20vw;
+    height: 6vh;
+    max-width: 100px;
+    font-size: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(217, 235, 247);
+    /* margin-right: 10px; */
 }
 
 #button-field {
@@ -48,29 +75,31 @@ body {
     height: 60vh;
     display: flex;
     /* flex-direction: column; */
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 0px;
+    max-width: 400px;
 }
 
-#backspace {
+#button-container {
     border: solid green;
-    width: 10vw;
-    height: 4vh;
-    font-size: 32px;
+    width:90vw;
+    height: 57vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    background-color: rgb(217, 235, 247);
+    align-items: center;
 }
 
 .button-row {
     border: dashed purple;
-    width: 94vw;
+    width: 90vw;
     height: 10vh;
     display: flex;
     /* flex-direction: column; */
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    max-width: 370px;
 }
 
 .btn {
@@ -78,4 +107,14 @@ body {
     height: 10vh;
     border-radius: 50%;
     font-size: 2rem;
+    max-width: 80px;
+}
+@media (min-width: 1200px) {
+    .button-row {
+        height: 10vh;
+    }
+    .btn {
+        max-width: 60px;
+        max-height: 100px;
+    }
 }
