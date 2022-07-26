@@ -5,17 +5,29 @@ function inputNum(e) {
     console.log("hi")
     //problemField.textContent += parseInt(e.target.value)
     //problemField.innerHTML += `<span style='font-size:40px;'>${displayAnswer}</span>`;
+    if (operateNumbers == true) {
+        console.log("yep")
+        inputSecondNum(e)
+    }
 }
 
 // Sets first entry as num1, registers which operation was chosen
 function setNum1(e) {
-    // If first time being used
-    if (operateNumbers == false) { 
+    if (operateNumbers == false) { // If first time being used
         console.log("bye")
         operateNumbers = true;
         num1 = parseInt(problemField.innerHTML); // num1 is first num before operator
+        problemField.innerHTML += ` ${e.target.textContent} `
     }
-    problemField.innerHTML += ` ${e.target.textContent} `
+    else { // Used to calculate answer before doing more
+        //figure out which operation to do
+    }
+}
+
+function inputSecondNum(e) {
+    console.log("boop")
+    num2 = e.target.value
+    console.log(num2)
 }
 // function setAdd() {
 //     num1 = parseInt(problemField.innerHTML)
