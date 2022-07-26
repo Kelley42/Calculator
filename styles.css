@@ -30,7 +30,7 @@ body {
     border: dashed green;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: start;
     width: 88vw;
     height: 13vh;
     max-width: 380px;
@@ -40,10 +40,14 @@ body {
 
 #working-answer-field {
     border: dashed orange;
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
     width: 88vw;
     height: 7vh;
     max-width: 380px;
     padding: 10px;
+    font-size: 30px;
 }
 
 #in-between-field {
