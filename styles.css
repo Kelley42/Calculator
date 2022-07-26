@@ -32,7 +32,7 @@ body {
     justify-content: flex-end;
     align-items: center;
     width: 88vw;
-    height: 12vh;
+    height: 13vh;
     max-width: 380px;
     padding: 0 20px 0 0;
     font-size: 40px;
@@ -41,7 +41,7 @@ body {
 #working-answer-field {
     border: dashed orange;
     width: 88vw;
-    height: 8vh;
+    height: 7vh;
     max-width: 380px;
     padding: 10px;
 }
