@@ -13,30 +13,70 @@ function inputNum(e) {
 
 // Sets first entry as num1, registers which operation was chosen
 function setNum1(e) {
+    operator = e.target.textContent // Set operation
     if (operateNumbers == false) { // If first time being used
         console.log("bye")
         operateNumbers = true;
         num1 = parseInt(problemField.innerHTML); // num1 is first num before operator
-        problemField.innerHTML += ` ${e.target.textContent} `
+        problemField.innerHTML += ` ${operator} `
     }
     else { // Used to calculate answer before doing more
         //figure out which operation to do
+        // if (operator == "+") {
+        //     displayAnswer = addNum(num1, num2, operator);
+        // }
+        // workingAnswerField.innerHTML = displayAnswer;
     }
 }
 
+// Gives second number
 function inputSecondNum(e) {
     console.log("boop")
-    num2 = e.target.value
+    num2 = parseInt(e.target.value);
     console.log(num2)
+    // Shows working answer - addition
+    if (operator == "+") {
+        displayAnswer = addNum(num1, num2);
+    }
+    else if (operator == "-") {
+        displayAnswer = subtractNum(num1, num2);
+    }
+    else if (operator == "x") {
+        displayAnswer = multiplyNum(num1, num2);
+    }
+    else if (operator == "÷") {
+        displayAnswer = divideNum(num1, num2);
+        problemField.innerHTML = problemField.innerHTML.slice(0, -1)
+        setNum1(e)
+    }
+    workingAnswerField.innerHTML = displayAnswer;
 }
-// function setAdd() {
-//     num1 = parseInt(problemField.innerHTML)
-//     //num1 = problemField.innerHTML.slice(0, -1);
-// }
 
-// function setSubtract() {
-//     num1 = parseInt(problemField.innerHTML)
-// }
+function addNum(num1, num2) {
+    return num1 + num2;
+    //num1 = problemField.innerHTML.slice(0, -1);
+}
+
+function subtractNum(num1, num2) {
+    return num1 - num2;
+}
+
+function multiplyNum(num1, num2) {
+    return num1 * num2;
+}
+
+function divideNum(num1, num2) {
+    if (num2 == 0) {
+        alert("Can't divide by zero");
+        return ""
+        // console.log(problemField.innerHTML.slice(0, -1))
+        // return problemField.innerHTML.slice(0, -1)
+        // inputSecondNum(e)
+    }
+    else {
+        return num1 / num2;
+    }
+}
 
 
 function clearInput() {
@@ -49,6 +89,7 @@ function clearInput() {
 
 // Query selectors for top part
 const problemField = document.querySelector("#problem-field")
+const workingAnswerField = document.querySelector("#working-answer-field")
 
 // Query selectors for number buttons
 // const numButtons = document.querySelectorAll(".number-btn")
@@ -75,13 +116,13 @@ document.querySelectorAll(".operator-btn").forEach(operatorButtons => {
 })
 
 
-// const plusButton = document.querySelector("#plus") 
-// plusButton.addEventListener("click", setNum1) 
-// const minusButton = document.querySelector("#minus")
+//const plusButton = document.querySelector("#plus") 
+//plusButton.addEventListener("click", addNum(num1, num2)) 
+//const minusButton = document.querySelector("#minus")
 // minusButton.addEventListener("click", setNum1)
-// const divisionButton = document.querySelector("#division")
+//const divisionButton = document.querySelector("#division")
 // divisionButton.addEventListener("click", setNum1)
-// const multiplyButton = document.querySelector("#multiply") 
+//const multiplyButton = document.querySelector("#multiply") 
 // multiplyButton.addEventListener("click", setNum1)
 
 const backspaceButton = document.querySelector("#backspace")
@@ -102,3 +143,4 @@ let displayAnswer;
 let operateNumbers = false;
 let num1;
 let num2;
+let operator;
