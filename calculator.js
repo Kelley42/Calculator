@@ -11,6 +11,8 @@ function inputNum(e) {
 
 // When operator is hit - sets first entry as num1, registers which operation
 function setNum1(e) {
+    num1 = parseInt(num1)
+    console.log(typeof(num1))
     operator = e.target.textContent // Set operation
     if (operateNumbers == false) { // If first time being used
         console.log("bye")
