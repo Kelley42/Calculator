@@ -18,10 +18,10 @@ function setNum1(e) {
         console.log("bye")
         operateNumbers = true;
         num1 = parseInt(problemField.innerHTML); // num1 is first num before operator
-        problemField.innerHTML += ` ${operator} `
+        problemField.innerHTML += `${operator}`
     }
     else { // Used to calculate answer before doing more
-        //figure out which operation to do
+        
         // if (operator == "+") {
         //     displayAnswer = addNum(num1, num2, operator);
         // }
@@ -32,7 +32,17 @@ function setNum1(e) {
 // Gives second number
 function inputSecondNum(e) {
     console.log("boop")
-    num2 = parseInt(e.target.value);
+    if (num2) {
+        console.log("2exists")
+        console.log(num1, num2)
+        num2 += e.target.value;
+        num2 = parseInt(num2)
+    }
+    else {
+        console.log("2nothere")
+        num2 = parseInt(e.target.value);
+    }
+    console.log(num1)
     console.log(num2)
     // Shows working answer - addition
     if (operator == "+") {
@@ -46,8 +56,10 @@ function inputSecondNum(e) {
     }
     else if (operator == "÷") {
         displayAnswer = divideNum(num1, num2);
-        problemField.innerHTML = problemField.innerHTML.slice(0, -1)
-        setNum1(e)
+        console.log("divide")
+        if (num2 = 0) {
+            setNum1(e)
+        }
     }
     workingAnswerField.innerHTML = displayAnswer;
 }
@@ -68,19 +80,33 @@ function multiplyNum(num1, num2) {
 function divideNum(num1, num2) {
     if (num2 == 0) {
         alert("Can't divide by zero");
+        problemField.innerHTML = problemField.innerHTML.slice(0, -1)
         return ""
         // console.log(problemField.innerHTML.slice(0, -1))
         // return problemField.innerHTML.slice(0, -1)
         // inputSecondNum(e)
     }
     else {
+        console.log("woot")
         return num1 / num2;
     }
 }
 
+function showFinalAnswer() {
+    problemField.innerHTML = displayAnswer
+    workingAnswerField.innerHTML = ""
+    num1 = displayAnswer;
+    num2 = "";
+    operateNumbers = false;
+}
 
 function clearInput() {
     problemField.innerHTML = "";
+    workingAnswerField.innerHTML = "";
+    displayAnswer = ""
+    num1 = "";
+    num2 = "";
+    operator = "";
     // problemField.innerHTML = clearButton.value
 }
 
@@ -137,7 +163,8 @@ const percentButton = document.querySelector("#percent")
 const posnegButton = document.querySelector("#pos-neg") 
 const zeroButton = document.querySelector("#zero")   
 const decimalButton = document.querySelector("#decimal")
-const equalsButton = document.querySelector("#equals")            
+const equalsButton = document.querySelector("#equals") 
+equalsButton.addEventListener("click", showFinalAnswer)           
 
 let displayAnswer;
 let operateNumbers = false;
