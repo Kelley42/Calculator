@@ -1,4 +1,5 @@
 function inputNum(e) {
+    console.log(e)
     problemField.innerHTML += e.target.value; // will be string though, need to change to int for operations
     console.log("hi")
     //problemField.textContent += parseInt(e.target.value)
@@ -63,7 +64,7 @@ function inputSecondNum(e) {
             setNum1(e)
         }
     }
-    workingAnswerField.innerHTML = displayAnswer;
+    workingAnswerField.innerHTML = parseFloat(displayAnswer);
 }
 
 function addNum(num1, num2) {
