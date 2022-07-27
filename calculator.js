@@ -1,5 +1,3 @@
-
-
 function inputNum(e) {
     problemField.innerHTML += e.target.value; // will be string though, need to change to int for operations
     console.log("hi")
@@ -11,28 +9,30 @@ function inputNum(e) {
     }
 }
 
-// Sets first entry as num1, registers which operation was chosen
+// When operator is hit - sets first entry as num1, registers which operation
 function setNum1(e) {
     operator = e.target.textContent // Set operation
     if (operateNumbers == false) { // If first time being used
         console.log("bye")
         operateNumbers = true;
+        console.log(operateNumbers)
         num1 = parseInt(problemField.innerHTML); // num1 is first num before operator
-        problemField.innerHTML += `${operator}`
     }
     else { // Used to calculate answer before doing more
-        
+        num1 = parseInt(workingAnswerField.innerHTML)
+        num2 = "";
         // if (operator == "+") {
         //     displayAnswer = addNum(num1, num2, operator);
         // }
         // workingAnswerField.innerHTML = displayAnswer;
     }
+    problemField.innerHTML += `${operator}`
 }
 
 // Gives second number
 function inputSecondNum(e) {
     console.log("boop")
-    if (num2) {
+    if (num2) { //double or triple digit number
         console.log("2exists")
         console.log(num1, num2)
         num2 += e.target.value;
@@ -65,6 +65,8 @@ function inputSecondNum(e) {
 }
 
 function addNum(num1, num2) {
+    console.log(typeof(num1))
+    console.log(typeof(num2))
     return num1 + num2;
     //num1 = problemField.innerHTML.slice(0, -1);
 }
