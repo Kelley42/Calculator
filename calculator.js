@@ -1,5 +1,4 @@
 function inputNum(e) {
-    console.log(e)
     problemField.innerHTML += e.target.value; // will be string though, need to change to int for operations
     console.log("hi")
     //problemField.textContent += parseInt(e.target.value)
@@ -13,22 +12,23 @@ function inputNum(e) {
 // When operator is hit - sets first entry as num1, registers which operation
 function setNum1(e) {
     num1 = parseInt(num1)
-    console.log(typeof(num1))
     operator = e.target.textContent // Set operation
     if (operateNumbers == false) { // If first time being used
         console.log("bye")
         operateNumbers = true;
         console.log(operateNumbers)
-        num1 = parseInt(problemField.innerHTML); // num1 is first num before operator
+        console.log(problemField.innerHTML)
+        num1 = parseFloat(problemField.innerHTML); // num1 is first num before operator
     }
     else { // Used to calculate answer before doing more
-        num1 = parseInt(workingAnswerField.innerHTML)
+        num1 = parseFloat(workingAnswerField.innerHTML)
         num2 = "";
         // if (operator == "+") {
         //     displayAnswer = addNum(num1, num2, operator);
         // }
         // workingAnswerField.innerHTML = displayAnswer;
     }
+    console.log(num1)
     problemField.innerHTML += `${operator}`
 }
 
@@ -168,6 +168,7 @@ const percentButton = document.querySelector("#percent")
 const posnegButton = document.querySelector("#pos-neg") 
 const zeroButton = document.querySelector("#zero")   
 const decimalButton = document.querySelector("#decimal")
+decimalButton.addEventListener("click", inputNum)
 const equalsButton = document.querySelector("#equals") 
 equalsButton.addEventListener("click", showFinalAnswer)           
 
