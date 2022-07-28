@@ -1,9 +1,15 @@
 function inputNum(e) {
-    problemField.innerHTML += e.target.value; // will be string though, need to change to int for operations
+    // Show each digit
+
+    // problemField.innerHTML = toString(problemField.innerHTML) // change any digits already present into string
+    problemField.innerHTML += e.target.value; // string (need to => int)
     console.log("hi")
     //problemField.textContent += parseInt(e.target.value)
     //problemField.innerHTML += `<span style='font-size:40px;'>${displayAnswer}</span>`;
-    if (operateNumbers == true) {
+    if (operateNumbers == false) { // working on first num
+        num1on = true;
+    }
+    else if (operateNumbers == true) {
         console.log("yep")
         inputSecondNum(e)
     }
@@ -12,6 +18,7 @@ function inputNum(e) {
 // When operator is hit - sets first entry as num1, registers which operation
 function setNum1(e) {
     num1 = parseInt(num1)
+    num1on = false // done with num1
     operator = e.target.textContent // Set operation
     if (operateNumbers == false) { // If first time being used
         console.log("bye")
@@ -35,6 +42,7 @@ function setNum1(e) {
 // Gives second number
 function inputSecondNum(e) {
     console.log("boop")
+    num2on = true; // working on num2
     if (num2) { //double or triple digit number
         console.log("2exists")
         console.log(num1, num2)
@@ -103,6 +111,7 @@ function showFinalAnswer() {
     num1 = displayAnswer;
     num2 = "";
     operateNumbers = false;
+    num2on = false;
 }
 
 function clearInput() {
@@ -115,7 +124,29 @@ function clearInput() {
     // problemField.innerHTML = clearButton.value
 }
 
-
+function addPosNeg() {
+    if (!(num1) && num1on == false) { // haven't started typing digits
+        console.log("woohoo")
+        problemField.innerHTML = "-"
+    }
+    else if (num1on == true) { // typing num1
+        console.log("1on")
+        console.log(num1)
+        num1 = parseFloat(problemField.innerHTML)
+        num1 *= -1 
+        problemField.innerHTML = num1
+    }
+    else if (num2on == true) { // typing num2
+        num2 = parseFloat(num2)
+        num2 *= -1 
+        problemField.innerHTML = num2
+    }
+    else { // looking at final answer (already float)
+        displayAnswer *= -1;
+        problemField.innerHTML = displayAnswer;
+    }
+    
+}
 
 
 // Query selectors for top part
@@ -165,7 +196,8 @@ const percentButton = document.querySelector("#percent")
                   
 
         
-const posnegButton = document.querySelector("#pos-neg") 
+const posnegButton = document.querySelector("#pos-neg");
+posnegButton.addEventListener("click", addPosNeg)
 const zeroButton = document.querySelector("#zero")   
 const decimalButton = document.querySelector("#decimal")
 decimalButton.addEventListener("click", inputNum)
@@ -175,5 +207,7 @@ equalsButton.addEventListener("click", showFinalAnswer)
 let displayAnswer;
 let operateNumbers = false;
 let num1;
+let num1on = false;
 let num2;
+let num2on = false;
 let operator;
