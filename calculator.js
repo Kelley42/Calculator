@@ -37,12 +37,13 @@ function setNum1(e) {
     }
     console.log(num1)
     problemField.innerHTML += `${operator}`
+    num2on = true; // working on num2
 }
 
 // Gives second number
 function inputSecondNum(e) {
     console.log("boop")
-    num2on = true; // working on num2
+    
     if (num2) { //double or triple digit number
         console.log("2exists")
         console.log(num1, num2)
@@ -55,17 +56,25 @@ function inputSecondNum(e) {
     }
     console.log(num1)
     console.log(num2)
+    determineDisplayAnswer()
+}
+
+function determineDisplayAnswer() {
     // Shows working answer - addition
     if (operator == "+") {
+        addOn = true;
         displayAnswer = addNum(num1, num2);
     }
     else if (operator == "-") {
+        subtractOn = true;
         displayAnswer = subtractNum(num1, num2);
     }
     else if (operator == "x") {
+        multiplyOn = true;
         displayAnswer = multiplyNum(num1, num2);
     }
     else if (operator == "÷") {
+        divideOn = true;
         displayAnswer = divideNum(num1, num2);
         console.log("divide")
         if (num2 = 0) {
@@ -137,9 +146,18 @@ function addPosNeg() {
         problemField.innerHTML = num1
     }
     else if (num2on == true) { // typing num2
-        num2 = parseFloat(num2)
-        num2 *= -1 
-        problemField.innerHTML = num2
+        if (!(num2) || num2 == "") { // num2 doesn't exist
+            num2 = "-"
+            problemField.innerHTML += num2
+        }
+        else { // already typing num2
+            console.log(num2)
+            num2 = parseFloat(num2)
+            num2 *= -1 
+            problemField.innerHTML = num1+operator+num2
+
+        }
+        determineDisplayAnswer()
     }
     else { // looking at final answer (already float)
         displayAnswer *= -1;
@@ -211,3 +229,7 @@ let num1on = false;
 let num2;
 let num2on = false;
 let operator;
+let addOn = false;
+let subtractOn = false;
+let multiplyOn = false;
+let divideOn = false;
