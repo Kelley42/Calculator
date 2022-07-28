@@ -28,6 +28,7 @@ function setNum1(e) {
         num1 = parseFloat(problemField.innerHTML); // num1 is first num before operator
     }
     else { // Used to calculate answer before doing more
+        snapshotNum1 = problemField.innerHTML
         num1 = parseFloat(workingAnswerField.innerHTML)
         num2 = "";
         // if (operator == "+") {
@@ -130,6 +131,8 @@ function clearInput() {
     num1 = "";
     num2 = "";
     operator = "";
+    operateNumbers = false;
+    num2on = false;
     // problemField.innerHTML = clearButton.value
 }
 
@@ -152,10 +155,18 @@ function addPosNeg() {
         }
         else { // already typing num2
             console.log(num2)
+            console.log("WHAAAAAAAT")
             num2 = parseFloat(num2)
             num2 *= -1 
-            problemField.innerHTML = num1+operator+num2
-
+            console.log(snapshotNum1)
+            if (snapshotNum1) { // more than 2 nums being operated
+                console.log("long")
+                snapshotNum1 += operator // add last operator
+                problemField.innerHTML = snapshotNum1 + num2
+            }
+            else {
+                problemField.innerHTML = num1+operator+num2
+            }
         }
         determineDisplayAnswer()
     }
@@ -233,3 +244,4 @@ let addOn = false;
 let subtractOn = false;
 let multiplyOn = false;
 let divideOn = false;
+let snapshotNum1; // before combining several numbers into num1
