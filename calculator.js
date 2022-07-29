@@ -2,7 +2,23 @@ function inputNum(e) {
     // Show each digit
 
     // problemField.innerHTML = toString(problemField.innerHTML) // change any digits already present into string
-    problemField.innerHTML += e.target.value; // string (need to => int)
+
+
+    // if (e.target.value) { // click event
+    //     console.log("yes")
+    //     problemField.innerHTML += e.target.value; // string (need to => int)
+    // }
+    // else { // keydown event
+    //     console.log("nope")
+    //     e.target.value = e.key
+    //     problemField.innerHTML += e.target.value
+    // }
+    if(e.key) {
+        problemField.innerHTML += e.key
+    }
+    else{
+        problemField.innerHTML += e.target.value;
+    }
     console.log("hi")
     //problemField.textContent += parseInt(e.target.value)
     //problemField.innerHTML += `<span style='font-size:40px;'>${displayAnswer}</span>`;
@@ -17,9 +33,28 @@ function inputNum(e) {
 
 // When operator is hit - sets first entry as num1, registers which operation
 function setNum1(e) {
+    console.log("boopboop")
+    console.log(e)
+    console.log(e.key)
+    if(e.key) {
+        operator = e.key
+    }
+    else {
+        operator = e.target.textContent
+    }
     num1 = parseInt(num1)
     num1on = false // done with num1
-    operator = e.target.textContent // Set operation
+    console.log(`textcontent${e.target.textContent}`)
+    
+    // if (e.target.textContent) { // click event
+    //     console.log("?????")
+    //     operator = e.target.textContent // Set operation
+    // }
+    // else { // keydown event
+    //     operator = e.key
+    //     console.log(operator)
+    // }
+    
     if (operateNumbers == false) { // If first time being used
         console.log("bye")
         operateNumbers = true;
@@ -27,7 +62,7 @@ function setNum1(e) {
         console.log(problemField.innerHTML)
         num1 = parseFloat(problemField.innerHTML); // num1 is first num before operator
     }
-    else { // Used to calculate answer before doing more
+    else { // Used instead of equals to calculate answer before doing more
         snapshotNum1 = problemField.innerHTML
         num1 = parseFloat(workingAnswerField.innerHTML)
         num2 = "";
@@ -37,7 +72,9 @@ function setNum1(e) {
         // workingAnswerField.innerHTML = displayAnswer;
     }
     console.log(num1)
+    console.log(operator)
     problemField.innerHTML += `${operator}`
+    console.log(problemField.innerHTML)
     num2on = true; // working on num2
 }
 
@@ -185,11 +222,40 @@ const workingAnswerField = document.querySelector("#working-answer-field")
 // Query selectors for number buttons
 // const numButtons = document.querySelectorAll(".number-btn")
 // numButtons.forEach( () => addEventListener("click", inputNum));
+
+// let numArray = [];
 document.querySelectorAll(".number-btn").forEach(numButtons => {
     numButtons.addEventListener("click", inputNum)
+    // numArray.push(numButtons)
+})
+// console.log(numArray)
+
+
+// Keydown events 
+window.addEventListener("keydown", function(e) {
+    if(e.key >= 0 && e.key <= 9) {
+        console.log(e.key)
+        e.target.value = e.key
+        inputNum(e)
+    }
+    else if(e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/") {
+        console.log(e.key)
+        // e.target.textContent = e.key
+        setNum1(e)
+    }
+    else if(e.key == "=") {
+        showFinalAnswer()
+    }
+    else if(e.key == "c") {
+        clearInput()
+    }
+    else if(e.key == ".") {
+        console.log(e.key)
+        inputNum(e)
+    }
 })
 
-// const oneButton = document.querySelector("#one") 
+
 // const twoButton = document.querySelector("#two")   
 // const threeButton = document.querySelector("#three")
 // const fourButton = document.querySelector("four")               
@@ -215,6 +281,8 @@ document.querySelectorAll(".operator-btn").forEach(operatorButtons => {
 // divisionButton.addEventListener("click", setNum1)
 //const multiplyButton = document.querySelector("#multiply") 
 // multiplyButton.addEventListener("click", setNum1)
+
+
 
 const backspaceButton = document.querySelector("#backspace")
 const clearButton = document.querySelector("#clear")
@@ -245,4 +313,3 @@ let subtractOn = false;
 let multiplyOn = false;
 let divideOn = false;
 let snapshotNum1; // before combining several numbers into num1
-

@@ -13,8 +13,12 @@ function inputNum(e) {
     //     e.target.value = e.key
     //     problemField.innerHTML += e.target.value
     // }
-    problemField.innerHTML += e.target.value;
-
+    if(e.key) {
+        problemField.innerHTML += e.key
+    }
+    else{
+        problemField.innerHTML += e.target.value;
+    }
     console.log("hi")
     //problemField.textContent += parseInt(e.target.value)
     //problemField.innerHTML += `<span style='font-size:40px;'>${displayAnswer}</span>`;
@@ -30,9 +34,18 @@ function inputNum(e) {
 // When operator is hit - sets first entry as num1, registers which operation
 function setNum1(e) {
     console.log("boopboop")
+    console.log(e)
+    console.log(e.key)
+    if(e.key) {
+        operator = e.key
+    }
+    else {
+        operator = e.target.textContent
+    }
     num1 = parseInt(num1)
     num1on = false // done with num1
-    operator = e.target.textContent
+    console.log(`textcontent${e.target.textContent}`)
+    
     // if (e.target.textContent) { // click event
     //     console.log("?????")
     //     operator = e.target.textContent // Set operation
@@ -59,7 +72,9 @@ function setNum1(e) {
         // workingAnswerField.innerHTML = displayAnswer;
     }
     console.log(num1)
+    console.log(operator)
     problemField.innerHTML += `${operator}`
+    console.log(problemField.innerHTML)
     num2on = true; // working on num2
 }
 
@@ -217,19 +232,29 @@ document.querySelectorAll(".number-btn").forEach(numButtons => {
 
 
 // Keydown events 
-// window.addEventListener("keydown", function(e) {
-//     if(e.key >= 0 && e.key <= 9) {
-//         console.log(e.key)
-//         e.target.value = e.key
-//         inputNum(e)
-//     }
-// })
-// window.addEventListener("keydown", function(e) {
-//     if(e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/") {
-//         console.log("hooray")
-//         setNum1(e)
-//     }
-// })
+window.addEventListener("keydown", function(e) {
+    if(e.key >= 0 && e.key <= 9) {
+        console.log(e.key)
+        e.target.value = e.key
+        inputNum(e)
+    }
+    else if(e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/") {
+        console.log(e.key)
+        // e.target.textContent = e.key
+        setNum1(e)
+    }
+    else if(e.key == "=") {
+        showFinalAnswer()
+    }
+    else if(e.key == "c") {
+        clearInput()
+    }
+    else if(e.key == ".") {
+        console.log(e.key)
+        inputNum(e)
+    }
+})
+
 
 // const twoButton = document.querySelector("#two")   
 // const threeButton = document.querySelector("#three")
