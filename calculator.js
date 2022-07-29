@@ -107,11 +107,11 @@ function determineDisplayAnswer() {
         subtractOn = true;
         displayAnswer = subtractNum(num1, num2);
     }
-    else if (operator == "x") {
+    else if (operator == "x" || operator == "*") {
         multiplyOn = true;
         displayAnswer = multiplyNum(num1, num2);
     }
-    else if (operator == "÷") {
+    else if (operator == "÷" || operator == "/") {
         divideOn = true;
         displayAnswer = divideNum(num1, num2);
         console.log("divide")
@@ -238,7 +238,7 @@ window.addEventListener("keydown", function(e) {
         e.target.value = e.key
         inputNum(e)
     }
-    else if(e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/") {
+    else if(e.key == "+" || e.key == "-" || e.key == "*" || e.key == "x" || e.key == "/") {
         console.log(e.key)
         // e.target.textContent = e.key
         setNum1(e)
