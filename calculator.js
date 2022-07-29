@@ -3,6 +3,7 @@ function inputNum(e) {
 
     // problemField.innerHTML = toString(problemField.innerHTML) // change any digits already present into string
 
+    
 
     // if (e.target.value) { // click event
     //     console.log("yes")
@@ -24,6 +25,7 @@ function inputNum(e) {
     //problemField.innerHTML += `<span style='font-size:40px;'>${displayAnswer}</span>`;
     if (operateNumbers == false) { // working on first num
         num1on = true;
+        num1 = parseFloat(problemField.innerHTML)
     }
     else if (operateNumbers == true) {
         console.log("yep")
@@ -34,17 +36,14 @@ function inputNum(e) {
 // When operator is hit - sets first entry as num1, registers which operation
 function setNum1(e) {
     console.log("boopboop")
-    console.log(e)
-    console.log(e.key)
     if(e.key) {
         operator = e.key
     }
     else {
         operator = e.target.textContent
     }
-    num1 = parseInt(num1)
+    num1 = parseFloat(num1)
     num1on = false // done with num1
-    console.log(`textcontent${e.target.textContent}`)
     
     // if (e.target.textContent) { // click event
     //     console.log("?????")
@@ -58,9 +57,7 @@ function setNum1(e) {
     if (operateNumbers == false) { // If first time being used
         console.log("bye")
         operateNumbers = true;
-        console.log(operateNumbers)
-        console.log(problemField.innerHTML)
-        num1 = parseFloat(problemField.innerHTML); // num1 is first num before operator
+        //num1 = parseFloat(problemField.innerHTML); // num1 is first num before operator
     }
     else { // Used instead of equals to calculate answer before doing more
         snapshotNum1 = problemField.innerHTML
@@ -71,7 +68,7 @@ function setNum1(e) {
         // }
         // workingAnswerField.innerHTML = displayAnswer;
     }
-    console.log(num1)
+    console.log(`num1:${num1}`)
     console.log(operator)
     problemField.innerHTML += `${operator}`
     console.log(problemField.innerHTML)
@@ -81,7 +78,8 @@ function setNum1(e) {
 // Gives second number
 function inputSecondNum(e) {
     console.log("boop")
-    
+    console.log(num1)
+    console.log(e)
     if (num2) { //double or triple digit number
         console.log("2exists")
         console.log(num1, num2)
@@ -152,6 +150,22 @@ function divideNum(num1, num2) {
     }
 }
 
+function percentNum() {
+    console.log("booyah")
+    num1 = parseFloat(problemField.innerHTML)
+    problemField.innerHTML += "%"
+    if (num1on == true) { // working on num1
+        num1 /= 100;
+        workingAnswerField.innerHTML = num1
+        console.log(num1)
+    }
+    else if (num2on == true) { // working on num2
+        num2 /= 100;
+        num2 *= num1;
+        determineDisplayAnswer()
+    }
+}
+
 function showFinalAnswer() {
     problemField.innerHTML = displayAnswer
     workingAnswerField.innerHTML = ""
@@ -216,8 +230,8 @@ function addPosNeg() {
 
 
 // Query selectors for top part
-const problemField = document.querySelector("#problem-field")
-const workingAnswerField = document.querySelector("#working-answer-field")
+let problemField = document.querySelector("#problem-field")
+let workingAnswerField = document.querySelector("#working-answer-field")
 
 // Query selectors for number buttons
 // const numButtons = document.querySelectorAll(".number-btn")
@@ -252,6 +266,9 @@ window.addEventListener("keydown", function(e) {
     else if(e.key == ".") {
         console.log(e.key)
         inputNum(e)
+    }
+    else if(e.key == "%") {
+        percentNum(e)
     }
 })
 
@@ -289,9 +306,7 @@ const clearButton = document.querySelector("#clear")
 clearButton.addEventListener("click", clearInput)
 const parenthesesButton = document.querySelector("#parentheses")
 const percentButton = document.querySelector("#percent")
-                       
-                  
-
+percentButton.addEventListener("click", percentNum)
         
 const posnegButton = document.querySelector("#pos-neg");
 posnegButton.addEventListener("click", addPosNeg)
