@@ -3,10 +3,7 @@ function inputNum(e) {
     //     alert("Max limit of digits")
     //     return;
     // }
-    console.log(problemField.innerHTML.length)
     if (problemField.innerHTML && problemField.innerHTML.length > 29) {
-        console.log(problemField.innerHTML.length)
-        console.log(problemField.innerHTML)
         alert("Max limit of digits")
         return
     }
@@ -54,12 +51,24 @@ function inputNum(e) {
                 num1 = "0."
                 problemField.innerHTML = num1
             }
+            //num1commas = num1.toLocaleString() //if decimal
+            num1commas += "." 
+            console.log(`decimal:${num1commas}`)
+        }
+        else {
+            num1 = (problemField.innerHTML.replace(/\,/g, ""))
+            console.log(num1)
+            num1commas = Number(num1).toLocaleString() //no decimal
+            console.log(num1commas)
         }
         // problemField.innerHTML = problemField.innerHTML.replace(/\,/g, "") //strip commas
+        
 
-        num1 = parseFloat(problemField.innerHTML)
-        // num1 = parseFloat(problemField.innerHTML.replace(/\,/g, "")) //strips commas if present
-        // problemField.innerHTML = num1.toLocaleString()
+        //num1 = parseFloat(num1.replace(/\,/g, "")) //strips commas if present
+        console.log(num1)
+        // num1 = parseFloat(problemField.innerHTML)
+        console.log(num1commas)
+        problemField.innerHTML = num1commas
         
     }
     else if (operateNumbers == true) {
@@ -425,8 +434,10 @@ let displayAnswer;
 let operateNumbers = false;
 let num1;
 let num1on = false;
+let num1commas;
 let num2;
 let num2on = false;
+let num2commas;
 let operator;
 let addOn = false;
 let subtractOn = false;
