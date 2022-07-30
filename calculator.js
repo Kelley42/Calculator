@@ -1,6 +1,6 @@
 function inputNum(e) {
     // Show each digit
-
+    
     // problemField.innerHTML = toString(problemField.innerHTML) // change any digits already present into string
 
     
@@ -16,9 +16,11 @@ function inputNum(e) {
     // }
     if(e.key) {
         problemField.innerHTML += e.key
+        console.log(e.key)
     }
     else{
         problemField.innerHTML += e.target.value;
+        console.log(e.target.value)
     }
     console.log("hi")
     //problemField.textContent += parseInt(e.target.value)
@@ -26,6 +28,9 @@ function inputNum(e) {
     if (operateNumbers == false) { // working on first num
         num1on = true;
         num1 = parseFloat(problemField.innerHTML)
+        if (e.target.value == "." || e.key == ".") { // include decimal in num
+            num1 += "."
+        }
     }
     else if (operateNumbers == true) {
         console.log("yep")
@@ -80,23 +85,36 @@ function inputSecondNum(e) {
     console.log("boop")
     console.log(num1)
     console.log(e)
-    if (num2) { //double or triple digit number
+    if (num2) { //double or triple digit number or decimal
         console.log("2exists")
         console.log(num1, num2)
-        num2 += e.target.value;
-        num2 = parseInt(num2)
+        console.log(e.target.value)
+        if (e.target.value == "." || e.key == ".") { // include decimal in num
+            console.log("decimal")
+            num2 += "."
+            console.log(num2)
+        }
+        else {
+            num2 += e.target.value;
+            num2 = parseInt(num2)
+        }
     }
     else {
         console.log("2nothere")
         num2 = parseInt(e.target.value);
     }
     console.log(num1)
-    console.log(num2)
-    determineDisplayAnswer()
+    console.log(`num2:${num2}`)
+    if (!(e.target.value == "." || e.key == ".")) { //only determine answer if last input not decimal
+        determineDisplayAnswer()
+    }
 }
 
 function determineDisplayAnswer() {
+    console.log("determine")
     // Shows working answer - addition
+    num1 = parseFloat(num1)
+    num2 = parseFloat(num2)
     if (operator == "+") {
         addOn = true;
         displayAnswer = addNum(num1, num2);
@@ -121,8 +139,6 @@ function determineDisplayAnswer() {
 }
 
 function addNum(num1, num2) {
-    console.log(typeof(num1))
-    console.log(typeof(num2))
     return num1 + num2;
     //num1 = problemField.innerHTML.slice(0, -1);
 }
@@ -164,6 +180,32 @@ function percentNum() {
         num2 *= num1;
         determineDisplayAnswer()
     }
+}
+
+function backspaceNum() {
+    console.log(num1)
+    console.log("byeeeee")
+    if (num1on == true) { // typing num1
+        num1 = String(num1)
+        console.log(num1)
+        console.log(num1.slice(0, -1))
+        num1 = num1.slice(0, -1)
+        console.log(num1)
+        problemField.innerHTML = num1
+    }
+    else if (num2on == true) { // typing num2
+        console.log("2nd")
+        console.log(num2)
+        num2 = String(num2)
+        console.log(num2)
+        num2 = num2.slice(0, -1)
+        console.log(num1, operator, num2)
+        problemField.innerHTML = num1 + operator + num2
+        determineDisplayAnswer()
+    }
+
+    // problemField.innerHTML = String(problemField.innerHTML.slice(0, -1))
+    
 }
 
 function showFinalAnswer() {
@@ -302,6 +344,7 @@ document.querySelectorAll(".operator-btn").forEach(operatorButtons => {
 
 
 const backspaceButton = document.querySelector("#backspace")
+backspaceButton.addEventListener("click", backspaceNum)
 const clearButton = document.querySelector("#clear")
 clearButton.addEventListener("click", clearInput)
 const parenthesesButton = document.querySelector("#parentheses")
