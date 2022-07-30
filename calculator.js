@@ -33,15 +33,20 @@ function inputNum(e) {
             if (num1) { // Digits before decimal
                 console.log("already here")
                 num1 += "."
+                problemField.innerHTML = num1
             }
             else { // Decimal is first input - show 0 before decimal
                 console.log("not already here")
                 num1 = "0."
-                console.log(num1)
                 problemField.innerHTML = num1
             }
         }
+        // problemField.innerHTML = problemField.innerHTML.replace(/\,/g, "") //strip commas
+
         num1 = parseFloat(problemField.innerHTML)
+        // num1 = parseFloat(problemField.innerHTML.replace(/\,/g, "")) //strips commas if present
+        // problemField.innerHTML = num1.toLocaleString()
+        
     }
     else if (operateNumbers == true) {
         console.log("yep")
@@ -88,7 +93,6 @@ function setNum1(e) {
     console.log(operator)
     problemField.innerHTML += `${operator}`
     console.log(problemField.innerHTML)
-    num2on = true; // working on num2
 }
 
 // Gives second number
@@ -96,6 +100,7 @@ function inputSecondNum(e) {
     console.log("boop")
     console.log(num1)
     console.log(e)
+    num2on = true; // working on num2
     if (num2) { //double or triple digit number or decimal
         console.log("2exists")
         console.log(num1, num2)
@@ -222,15 +227,27 @@ function backspaceNum() {
         num2 = num2.slice(0, -1)
         console.log(num1, operator, num2)
         problemField.innerHTML = num1 + operator + num2
-        determineDisplayAnswer()
+        // if erased all of num2
+        if(num2 == "") {
+            console.log("empty")
+            workingAnswerField.innerHTML = num1
+        }
+        else{
+            determineDisplayAnswer()
+        }
     }
+    else { //typing operator
+        problemField.innerHTML = num1
 
+    }
+    
     // problemField.innerHTML = String(problemField.innerHTML.slice(0, -1))
     
 }
 
 function showFinalAnswer() {
     problemField.innerHTML = displayAnswer
+    problemField.innerHTML = Number(problemField.innerHTML).toLocaleString() //show commas
     workingAnswerField.innerHTML = ""
     num1 = displayAnswer;
     num2 = "";
