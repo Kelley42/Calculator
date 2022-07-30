@@ -14,11 +14,11 @@ function inputNum(e) {
     //     e.target.value = e.key
     //     problemField.innerHTML += e.target.value
     // }
-    if(e.key) {
+    if(e.key) { // keyboard input
         problemField.innerHTML += e.key
         console.log(e.key)
     }
-    else{
+    else{ // click input
         problemField.innerHTML += e.target.value;
         console.log(e.target.value)
     }
@@ -27,10 +27,21 @@ function inputNum(e) {
     //problemField.innerHTML += `<span style='font-size:40px;'>${displayAnswer}</span>`;
     if (operateNumbers == false) { // working on first num
         num1on = true;
-        num1 = parseFloat(problemField.innerHTML)
+        
         if (e.target.value == "." || e.key == ".") { // include decimal in num
-            num1 += "."
+            console.log(num1)
+            if (num1) { // Digits before decimal
+                console.log("already here")
+                num1 += "."
+            }
+            else { // Decimal is first input - show 0 before decimal
+                console.log("not already here")
+                num1 = "0."
+                console.log(num1)
+                problemField.innerHTML = num1
+            }
         }
+        num1 = parseFloat(problemField.innerHTML)
     }
     else if (operateNumbers == true) {
         console.log("yep")
@@ -88,20 +99,30 @@ function inputSecondNum(e) {
     if (num2) { //double or triple digit number or decimal
         console.log("2exists")
         console.log(num1, num2)
-        console.log(e.target.value)
+        console.log(`target: ${e.target.value}`)
         if (e.target.value == "." || e.key == ".") { // include decimal in num
             console.log("decimal")
             num2 += "."
             console.log(num2)
         }
-        else {
+        else { // input is digit
+            console.log("combine")
             num2 += e.target.value;
-            num2 = parseInt(num2)
+            console.log(`num2: ${num2}`)
+            num2 = parseFloat(num2)
+            console.log(`parsed${num2}`)
         }
     }
     else {
         console.log("2nothere")
-        num2 = parseInt(e.target.value);
+        if (e.target.value == "." || e.key == ".") {
+            num2 = "0."
+            console.log(num2)
+            problemField.innerHTML = num1 + operator + num2
+        }
+        else {
+            num2 = parseFloat(e.target.value);
+        }
     }
     console.log(num1)
     console.log(`num2:${num2}`)
