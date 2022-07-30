@@ -1,8 +1,5 @@
 function inputNum(e) {
-    // if ((num1 && num1.toString().length > 4) || (num2 && num2.toString().length > 4)) {
-    //     alert("Max limit of digits")
-    //     return;
-    // }
+    // If overall length of problem too long
     if (problemField.innerHTML && problemField.innerHTML.length > 29) {
         alert("Max limit of digits")
         return
@@ -25,55 +22,49 @@ function inputNum(e) {
     else{
         if(e.key) { // keyboard input
             problemField.innerHTML += e.key
-            console.log(e.key)
         }
         else{ // click input
             problemField.innerHTML += e.target.value;
-            console.log(e.target.value)
         }
-    }
     
-    console.log("hi")
-    //problemField.textContent += parseInt(e.target.value)
-    //problemField.innerHTML += `<span style='font-size:40px;'>${displayAnswer}</span>`;
-    if (operateNumbers == false) { // working on first num
-        num1on = true;
-        
-        if (e.target.value == "." || e.key == ".") { // include decimal in num
-            console.log(num1)
-            if (num1) { // Digits before decimal
-                console.log("already here")
-                num1 += "."
-                problemField.innerHTML = num1
+        //problemField.textContent += parseInt(e.target.value)
+        //problemField.innerHTML += `<span style='font-size:40px;'>${displayAnswer}</span>`;
+        if (operateNumbers == false) { // working on first num
+            num1on = true;
+            // If input is decimal
+            if (e.target.value == "." || e.key == ".") { 
+                // Decimal after digit
+                if (num1) {
+                    console.log("already here")
+                    num1 += "."
+                    num1commas += "."
+                }
+                // Decimal is first input - show 0 before decimal
+                else { 
+                    console.log("not already here")
+                    num1 = "0."
+                    num1commas += "0."
+                }
             }
-            else { // Decimal is first input - show 0 before decimal
-                console.log("not already here")
-                num1 = "0."
-                problemField.innerHTML = num1
+            // Input is digit
+            else {
+                num1 = (problemField.innerHTML.replace(/\,/g, "")) //strip commas
+                num1commas = Number(num1).toLocaleString() //format if no decimal
             }
-            //num1commas = num1.toLocaleString() //if decimal
-            num1commas += "." 
-            console.log(`decimal:${num1commas}`)
-        }
-        else {
-            num1 = (problemField.innerHTML.replace(/\,/g, ""))
-            console.log(num1)
-            num1commas = Number(num1).toLocaleString() //no decimal
-            console.log(num1commas)
-        }
-        // problemField.innerHTML = problemField.innerHTML.replace(/\,/g, "") //strip commas
-        
+            // problemField.innerHTML = problemField.innerHTML.replace(/\,/g, "") //strip commas
+            
 
-        //num1 = parseFloat(num1.replace(/\,/g, "")) //strips commas if present
-        console.log(num1)
-        // num1 = parseFloat(problemField.innerHTML)
-        console.log(num1commas)
-        problemField.innerHTML = num1commas
+            //num1 = parseFloat(num1.replace(/\,/g, "")) //strips commas if present
+            console.log(num1)
+            // num1 = parseFloat(problemField.innerHTML)
+            console.log(num1commas)
+            problemField.innerHTML = num1commas
         
-    }
-    else if (operateNumbers == true) {
-        console.log("yep")
-        inputSecondNum(e)
+        }
+        else if (operateNumbers == true) { //working on second num
+            console.log("yep")
+            inputSecondNum(e)
+        }
     }
 }
 
@@ -115,7 +106,6 @@ function setNum1(e) {
     console.log(`num1:${num1}`)
     console.log(operator)
     problemField.innerHTML += `${operator}`
-    console.log(problemField.innerHTML)
 }
 
 // Gives second number
@@ -124,37 +114,59 @@ function inputSecondNum(e) {
     console.log(num1)
     console.log(e)
     num2on = true; // working on num2
+    // Num2 already exists
     if (num2) { //double or triple digit number or decimal
-        console.log("2exists")
         console.log(num1, num2)
-        console.log(`target: ${e.target.value}`)
-        if (e.target.value == "." || e.key == ".") { // include decimal in num
-            console.log("decimal")
+        // Input is decimal
+        if (e.target.value == "." || e.key == ".") { 
+            console.log("nowdecimal")
             num2 += "."
+            num2commas += "."
             console.log(num2)
+            console.log(num2commas)
         }
-        else { // input is digit
-            console.log("combine")
+        // Input is digit
+        else { 
+            console.log("digitfirst")
             num2 += e.target.value;
+            num2commas = Number(num2).toLocaleString()
+            console.log(`what:${num2commas}`)
             console.log(`num2: ${num2}`)
             num2 = parseFloat(num2)
             console.log(`parsed${num2}`)
         }
     }
+    // Num2 doesn't exist yet
     else {
         console.log("2nothere")
-        if (e.target.value == "." || e.key == ".") {
+        // Decimal first - put 0 in front
+        if (e.target.value == "." || e.key == ".") { 
             num2 = "0."
+            num2commas += "0."
             console.log(num2)
-            problemField.innerHTML = num1 + operator + num2
+            //problemField.innerHTML = num1commas + operator + num2commas
         }
+        // Digit first
         else {
             num2 = parseFloat(e.target.value);
+            num2commas = num2
         }
     }
-    console.log(num1)
-    console.log(`num2:${num2}`)
+    //num2 = (num2.replace(/\,/g, "")) //strip commas
+    
+    
+    // console.log(num1)
+    // console.log(`num2:${num2}`)
+    //console.log(num2commas)
+    problemField.innerHTML = num1commas + operator + num2commas
+    // If last input not a decimal, allow to determine answer
     if (!(e.target.value == "." || e.key == ".")) { //only determine answer if last input not decimal
+        determineDisplayAnswer()
+    }
+    // Last input is decimal
+    else {
+        // Take off decimal
+        num2 = num2.slice(0, -1) 
         determineDisplayAnswer()
     }
 }
