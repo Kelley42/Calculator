@@ -1,5 +1,15 @@
 function inputNum(e) {
-    // Show each digit
+    // if ((num1 && num1.toString().length > 4) || (num2 && num2.toString().length > 4)) {
+    //     alert("Max limit of digits")
+    //     return;
+    // }
+    console.log(problemField.innerHTML.length)
+    if (problemField.innerHTML && problemField.innerHTML.length > 29) {
+        console.log(problemField.innerHTML.length)
+        console.log(problemField.innerHTML)
+        alert("Max limit of digits")
+        return
+    }
     
     // problemField.innerHTML = toString(problemField.innerHTML) // change any digits already present into string
 
@@ -14,14 +24,18 @@ function inputNum(e) {
     //     e.target.value = e.key
     //     problemField.innerHTML += e.target.value
     // }
-    if(e.key) { // keyboard input
-        problemField.innerHTML += e.key
-        console.log(e.key)
+
+    else{
+        if(e.key) { // keyboard input
+            problemField.innerHTML += e.key
+            console.log(e.key)
+        }
+        else{ // click input
+            problemField.innerHTML += e.target.value;
+            console.log(e.target.value)
+        }
     }
-    else{ // click input
-        problemField.innerHTML += e.target.value;
-        console.log(e.target.value)
-    }
+    
     console.log("hi")
     //problemField.textContent += parseInt(e.target.value)
     //problemField.innerHTML += `<span style='font-size:40px;'>${displayAnswer}</span>`;
@@ -246,8 +260,15 @@ function backspaceNum() {
 }
 
 function showFinalAnswer() {
-    problemField.innerHTML = displayAnswer
+    // problemField.innerHTML = displayAnswer
+    console.log(`displayAnswer: ${displayAnswer}`)
+    console.log(`workingAnswerField: ${workingAnswerField.innerHTML}`)
+    problemField.innerHTML = parseFloat(displayAnswer)
     problemField.innerHTML = Number(problemField.innerHTML).toLocaleString() //show commas
+    if (problemField.innerHTML.length > 29) { // shrink font to fit
+        problemField.style.fontSize = "30px"
+    }
+    
     workingAnswerField.innerHTML = ""
     num1 = displayAnswer;
     num2 = "";
@@ -412,3 +433,5 @@ let subtractOn = false;
 let multiplyOn = false;
 let divideOn = false;
 let snapshotNum1; // before combining several numbers into num1
+
+console.log(problemField.innerHTML.length)

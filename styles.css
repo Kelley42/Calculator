@@ -29,6 +29,9 @@ body {
 #problem-field {
     border: dashed green;
     display: flex;
+    flex-wrap: wrap;
+    word-wrap: break-word;
+    word-break: break-word;
     justify-content: flex-end;
     align-items: start;
     width: 88vw;
