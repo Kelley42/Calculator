@@ -333,6 +333,9 @@ window.addEventListener("keydown", function(e) {
     else if(e.key == "%") {
         percentNum(e)
     }
+    else if(e.key == "Backspace") {
+        backspaceNum(e)
+    }
 })
 
 
