@@ -167,6 +167,8 @@ function inputSecondNum(e) {
     
     // console.log(num1)
     // console.log(`num2:${num2}`)
+    console.log(num1)
+    console.log(num1commas)
     console.log(`num2 2and4: ${num2}`)
     console.log(`num2commas2and4: ${num2commas}`)
     if (snapshotNum1On == true) { // multiple operations
@@ -314,6 +316,7 @@ function showFinalAnswer() {
     
     workingAnswerField.innerHTML = ""
     num1 = displayAnswer;
+    num1commas = displayAnswer;
     num2 = "";
     operateNumbers = false;
     num2on = false;
