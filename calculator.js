@@ -256,14 +256,17 @@ function percentNum() {
     num1 = parseFloat(problemField.innerHTML)
     problemField.innerHTML += "%"
     if (num1on == true) { // working on num1
+        num1commas = num1 + "%"
         num1 /= 100;
         displayAnswer = num1
+        //num1commas = num1
         workingAnswerField.innerHTML = num1
         console.log(num1)
     }
     else if (num2on == true) { // working on num2
         num2 /= 100;
         num2 *= num1;
+        num2commas = num2;
         determineDisplayAnswer()
     }
 }
@@ -271,22 +274,36 @@ function percentNum() {
 function backspaceNum() {
     console.log(num1)
     console.log("byeeeee")
+    console.log(num1commas)
     if (num1on == true) { // typing num1
         num1 = String(num1)
-        console.log(num1)
-        console.log(num1.slice(0, -1))
-        num1 = num1.slice(0, -1)
-        console.log(num1)
-        problemField.innerHTML = num1
+        num1commas = String(num1commas)
+        // Erase last symbol
+        //num1 = num1commas.slice(0, -1)
+        num1commas = num1commas.slice(0, -1)
+        // Strip commas
+        num1 = num1commas.replace(/\,/g, "") 
+        num1commas = num1commas.replace(/\,/g, "") 
+        // Convert num1commas to be formatted again
+        num1commas = Number(num1).toLocaleString()
+        problemField.innerHTML = num1commas
+        workingAnswerField.innerHTML = num1commas
     }
     else if (num2on == true) { // typing num2
         console.log("2nd")
-        console.log(num2)
         num2 = String(num2)
+        num2commas = String(num2commas)
         console.log(num2)
-        num2 = num2.slice(0, -1)
-        console.log(num1, operator, num2)
-        problemField.innerHTML = num1 + operator + num2
+        console.log(`num2commas:${num2commas}`)
+        // Erase last symbol
+        num2commas = num2commas.slice(0, -1)
+        // Strip commas
+        num2 = num2commas.replace(/\,/g, "") 
+        num2commas = num2commas.replace(/\,/g, "")
+        console.log(num1commas, operator, num2commas)
+        // Reformat
+        num2commas = Number(num2).toLocaleString()
+        problemField.innerHTML = num1commas + operator + num2commas
         // if erased all of num2
         if(num2 == "") {
             console.log("empty")
@@ -297,7 +314,7 @@ function backspaceNum() {
         }
     }
     else { //typing operator
-        problemField.innerHTML = num1
+        problemField.innerHTML = num1commas
 
     }
     
