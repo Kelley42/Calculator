@@ -257,6 +257,7 @@ function percentNum() {
     problemField.innerHTML += "%"
     if (num1on == true) { // working on num1
         num1 /= 100;
+        displayAnswer = num1
         workingAnswerField.innerHTML = num1
         console.log(num1)
     }
