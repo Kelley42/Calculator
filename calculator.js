@@ -74,10 +74,10 @@ function inputNum(e) {
 // When operator is hit - sets first entry as num1, registers which operation
 function setNum1(e) {
     console.log("boopboop")
-    if(e.key) {
+    if(e.key) { //keyboard input
         operator = e.key
     }
-    else {
+    else { //clicked input
         operator = e.target.textContent
     }
     num1 = parseFloat(num1)
@@ -99,6 +99,7 @@ function setNum1(e) {
     }
     else { // Used instead of equals to calculate answer before doing more
         snapshotNum1 = problemField.innerHTML
+        snapshotNum1On = true;
         num1 = parseFloat(workingAnswerField.innerHTML)
         num2 = "";
         // if (operator == "+") {
@@ -168,7 +169,12 @@ function inputSecondNum(e) {
     // console.log(`num2:${num2}`)
     console.log(`num2 2and4: ${num2}`)
     console.log(`num2commas2and4: ${num2commas}`)
-    problemField.innerHTML = num1commas + operator + num2commas
+    if (snapshotNum1On == true) { // multiple operations
+        problemField.innerHTML = snapshotNum1 + operator + num2commas;
+    }
+    else {
+        problemField.innerHTML = num1commas + operator + num2commas
+    }
     // If last input not a decimal, allow to determine answer
     if (!(e.target.value == "." || e.key == ".")) { //only determine answer if last input not decimal
         determineDisplayAnswer()
@@ -311,6 +317,7 @@ function showFinalAnswer() {
     num2 = "";
     operateNumbers = false;
     num2on = false;
+    snapshotNum1On = false;
 }
 
 function clearInput() {
@@ -322,6 +329,7 @@ function clearInput() {
     operator = "";
     operateNumbers = false;
     num2on = false;
+    snapshotNum1On = false;
     // problemField.innerHTML = clearButton.value
 }
 
@@ -472,5 +480,6 @@ let subtractOn = false;
 let multiplyOn = false;
 let divideOn = false;
 let snapshotNum1; // before combining several numbers into num1
+let snapshotNum1On = false; // doing multiple operations
 
 console.log(problemField.innerHTML.length)
