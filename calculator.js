@@ -136,7 +136,7 @@ function inputSecondNum(e) {
             num2 = num2commas
             console.log(num2)
             console.log(`5: ${num2commas}`)
-            num2commas = Number(num2commas).toLocaleString()
+            num2commas = Number(num2).toLocaleString()
             console.log(`what:${num2commas}`)
             console.log(`num2: ${num2}`)
             num2 = parseFloat(num2)
@@ -189,7 +189,7 @@ function determineDisplayAnswer() {
     // Shows working answer - addition
     num1 = parseFloat(num1)
     num2 = parseFloat(num2)
-    console.log(`add: ${num1, num2}`)
+    console.log(`add: ${num1} ${num2}`)
     if (operator == "+") {
         addOn = true;
         displayAnswer = addNum(num1, num2);
