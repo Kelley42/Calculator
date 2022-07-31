@@ -277,6 +277,24 @@ function percentNum() {
     }
 }
 
+function squaredNum() {
+    num1 = parseFloat(problemField.innerHTML)
+    problemField.innerHTML += "²"
+    if (num1on == true) { // working on num1
+        num1commas = num1 + "²"
+        num1 *= num1;
+        displayAnswer = num1
+        //num1commas = num1
+        workingAnswerField.innerHTML = num1
+        console.log(num1)
+    }
+    else if (num2on == true) { // working on num2
+        num2 *= num2;
+        num2commas = num2;
+        determineDisplayAnswer()
+    }
+}
+
 function backspaceNum() {
     console.log(num1)
     console.log("byeeeee")
@@ -505,7 +523,8 @@ const backspaceButton = document.querySelector("#backspace")
 backspaceButton.addEventListener("click", backspaceNum)
 const clearButton = document.querySelector("#clear")
 clearButton.addEventListener("click", clearInput)
-const parenthesesButton = document.querySelector("#parentheses")
+const squaredButton = document.querySelector("#squared")
+squaredButton.addEventListener("click", squaredNum)
 const percentButton = document.querySelector("#percent")
 percentButton.addEventListener("click", percentNum)
         
