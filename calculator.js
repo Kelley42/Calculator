@@ -49,7 +49,9 @@ function inputNum(e) {
             // Input is digit
             else {
                 num1 = (problemField.innerHTML.replace(/\,/g, "")) //strip commas
+                console.log(`num1beforelocale: ${num1}`)
                 num1commas = Number(num1).toLocaleString() //format if no decimal
+                console.log(`num1commasafterlocale:${num1commas}`)
             }
             // problemField.innerHTML = problemField.innerHTML.replace(/\,/g, "") //strip commas
             
@@ -63,6 +65,7 @@ function inputNum(e) {
         }
         else if (operateNumbers == true) { //working on second num
             console.log("yep")
+            console.log(num2commas)
             inputSecondNum(e)
         }
     }
@@ -111,8 +114,7 @@ function setNum1(e) {
 // Gives second number
 function inputSecondNum(e) {
     console.log("boop")
-    console.log(num1)
-    console.log(e)
+    console.log(num2commas)
     num2on = true; // working on num2
     // Num2 already exists
     if (num2) { //double or triple digit number or decimal
@@ -123,13 +125,18 @@ function inputSecondNum(e) {
             num2 += "."
             num2commas += "."
             console.log(num2)
-            console.log(num2commas)
+            console.log(`num2commas input3:${num2commas}`)
         }
         // Input is digit
         else { 
-            console.log("digitfirst")
-            num2 += e.target.value;
-            num2commas = Number(num2).toLocaleString()
+            console.log("digitnow5")
+            console.log(num2)
+            //num2 += e.target.value;
+            num2commas += e.target.value
+            num2 = num2commas
+            console.log(num2)
+            console.log(`5: ${num2commas}`)
+            num2commas = Number(num2commas).toLocaleString()
             console.log(`what:${num2commas}`)
             console.log(`num2: ${num2}`)
             num2 = parseFloat(num2)
@@ -148,8 +155,11 @@ function inputSecondNum(e) {
         }
         // Digit first
         else {
+            console.log("digitfirst")
+            console.log(num2)
             num2 = parseFloat(e.target.value);
             num2commas = num2
+            console.log(`parse1: ${num1} ${num2commas}`)
         }
     }
     //num2 = (num2.replace(/\,/g, "")) //strip commas
@@ -157,18 +167,21 @@ function inputSecondNum(e) {
     
     // console.log(num1)
     // console.log(`num2:${num2}`)
-    //console.log(num2commas)
+    console.log(`num2 2and4: ${num2}`)
+    console.log(`num2commas2and4: ${num2commas}`)
     problemField.innerHTML = num1commas + operator + num2commas
     // If last input not a decimal, allow to determine answer
-    if (!(e.target.value == "." || e.key == ".")) { //only determine answer if last input not decimal
-        determineDisplayAnswer()
-    }
-    // Last input is decimal
-    else {
-        // Take off decimal
-        num2 = num2.slice(0, -1) 
-        determineDisplayAnswer()
-    }
+    // if (!(e.target.value == "." || e.key == ".")) { //only determine answer if last input not decimal
+    //     determineDisplayAnswer()
+    // }
+    // // Last input is decimal
+    // else {
+    //     console.log("slice!")
+    //     // Take off decimal
+    //     num2 = num2.slice(0, -1) 
+    //     determineDisplayAnswer()
+    // }
+    determineDisplayAnswer()
 }
 
 function determineDisplayAnswer() {
@@ -176,6 +189,7 @@ function determineDisplayAnswer() {
     // Shows working answer - addition
     num1 = parseFloat(num1)
     num2 = parseFloat(num2)
+    console.log(`add: ${num1, num2}`)
     if (operator == "+") {
         addOn = true;
         displayAnswer = addNum(num1, num2);
@@ -197,6 +211,7 @@ function determineDisplayAnswer() {
         }
     }
     workingAnswerField.innerHTML = parseFloat(displayAnswer);
+    //workingAnswerField.innerHTML = Number(workingAnswerField).toLocaleString()
 }
 
 function addNum(num1, num2) {
