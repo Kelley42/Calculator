@@ -26,7 +26,7 @@ function inputNum(e) {
         else{ // click input
             problemField.innerHTML += e.target.value;
         }
-    
+        num1 = problemField.innerHTML
         //problemField.textContent += parseInt(e.target.value)
         //problemField.innerHTML += `<span style='font-size:40px;'>${displayAnswer}</span>`;
         if (operateNumbers == false) { // working on first num
@@ -34,7 +34,7 @@ function inputNum(e) {
             // If input is decimal
             if (e.target.value == "." || e.key == ".") { 
                 // Decimal after digit
-                if (num1) {
+                if (num1on = true) {
                     console.log("already here")
                     num1 += "."
                     num1commas += "."
@@ -315,6 +315,8 @@ function backspaceNum() {
     }
     else { //typing operator
         problemField.innerHTML = num1commas
+        console.log(num1)
+        console.log(num1commas)
 
     }
     
