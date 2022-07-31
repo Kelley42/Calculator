@@ -26,7 +26,9 @@ function inputNum(e) {
         else{ // click input
             problemField.innerHTML += e.target.value;
         }
-        num1 = problemField.innerHTML
+        if (!(num1)) {
+            num1 = problemField.innerHTML
+        }
         //problemField.textContent += parseInt(e.target.value)
         //problemField.innerHTML += `<span style='font-size:40px;'>${displayAnswer}</span>`;
         if (operateNumbers == false) { // working on first num
@@ -65,6 +67,7 @@ function inputNum(e) {
         }
         else if (operateNumbers == true) { //working on second num
             console.log("yep")
+            console.log(num1)
             console.log(num2commas)
             inputSecondNum(e)
         }
@@ -115,6 +118,7 @@ function setNum1(e) {
 // Gives second number
 function inputSecondNum(e) {
     console.log("boop")
+    console.log(num1)
     console.log(num2commas)
     num2on = true; // working on num2
     // Num2 already exists
@@ -247,6 +251,8 @@ function divideNum(num1, num2) {
     }
     else {
         console.log("woot")
+        console.log(num1)
+        console.log(num2)
         return num1 / num2;
     }
 }
