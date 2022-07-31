@@ -286,14 +286,23 @@ function backspaceNum() {
         num1commas = String(num1commas)
         // Erase last symbol
         //num1 = num1commas.slice(0, -1)
-        num1commas = num1commas.slice(0, -1)
-        // Strip commas
-        num1 = num1commas.replace(/\,/g, "") 
-        num1commas = num1commas.replace(/\,/g, "") 
-        // Convert num1commas to be formatted again
-        num1commas = Number(num1).toLocaleString()
-        problemField.innerHTML = num1commas
-        workingAnswerField.innerHTML = num1commas
+        if (num1commas.length == 1) { // If last digit
+            num1commas = ""
+            num1 = ""
+            num1on = false 
+            problemField.innerHTML = num1commas
+            workingAnswerField.innerHTML = num1commas
+        }
+        else {
+            num1commas = num1commas.slice(0, -1)
+            // Strip commas
+            num1 = num1commas.replace(/\,/g, "") 
+            num1commas = num1commas.replace(/\,/g, "") 
+            // Convert num1commas to be formatted again
+            num1commas = Number(num1).toLocaleString()
+            problemField.innerHTML = num1commas
+            workingAnswerField.innerHTML = num1commas
+        }
     }
     else if (num2on == true) { // typing num2
         console.log("2nd")
@@ -302,27 +311,40 @@ function backspaceNum() {
         console.log(num2)
         console.log(`num2commas:${num2commas}`)
         // Erase last symbol
-        num2commas = num2commas.slice(0, -1)
-        // Strip commas
-        num2 = num2commas.replace(/\,/g, "") 
-        num2commas = num2commas.replace(/\,/g, "")
-        console.log(num1commas, operator, num2commas)
-        // Reformat
-        num2commas = Number(num2).toLocaleString()
-        problemField.innerHTML = num1commas + operator + num2commas
+        if (num2commas.length == 1) { // If last digit
+            num2commas = ""
+            num2 = ""
+            num2on = false 
+        }
+        else {
+            num2commas = num2commas.slice(0, -1)
+
+            // Strip commas
+            num2 = num2commas.replace(/\,/g, "") 
+            num2commas = num2commas.replace(/\,/g, "")
+            console.log(num1commas, operator, num2commas)
+            // Reformat
+            num2commas = Number(num2).toLocaleString()
+            console.log(`num2commas: ${num2commas}`)
+            problemField.innerHTML = num1commas + operator + num2commas
+        }
         // if erased all of num2
-        if(num2 == "") {
+        if(num2commas == "") {
             console.log("empty")
-            workingAnswerField.innerHTML = num1
+            workingAnswerField.innerHTML = num1commas
+            problemField.innerHTML = num1commas + operator
         }
         else{
+            console.log(`num2commasboop:${num2commas}`)
             determineDisplayAnswer()
         }
     }
     else { //typing operator
+        console.log("erase operator")
         problemField.innerHTML = num1commas
         console.log(num1)
         console.log(num1commas)
+        num1on = true
 
     }
     
