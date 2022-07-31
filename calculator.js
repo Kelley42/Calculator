@@ -131,11 +131,10 @@ function inputSecondNum(e) {
         else { 
             console.log("digitnow5")
             console.log(num2)
-            //num2 += e.target.value;
+            num2 = num2 + e.target.value;
             num2commas += e.target.value
-            num2 = num2commas
-            console.log(num2)
-            console.log(`5: ${num2commas}`)
+            //num2 = num2commas
+            console.log(`5: ${num2} ${num2commas}`)
             num2commas = Number(num2).toLocaleString()
             console.log(`what:${num2commas}`)
             console.log(`num2: ${num2}`)
@@ -171,9 +170,9 @@ function inputSecondNum(e) {
     console.log(`num2commas2and4: ${num2commas}`)
     problemField.innerHTML = num1commas + operator + num2commas
     // If last input not a decimal, allow to determine answer
-    // if (!(e.target.value == "." || e.key == ".")) { //only determine answer if last input not decimal
-    //     determineDisplayAnswer()
-    // }
+    if (!(e.target.value == "." || e.key == ".")) { //only determine answer if last input not decimal
+        determineDisplayAnswer()
+    }
     // // Last input is decimal
     // else {
     //     console.log("slice!")
@@ -181,18 +180,19 @@ function inputSecondNum(e) {
     //     num2 = num2.slice(0, -1) 
     //     determineDisplayAnswer()
     // }
-    determineDisplayAnswer()
 }
 
 function determineDisplayAnswer() {
     console.log("determine")
     // Shows working answer - addition
+    console.log(`add: ${num1} ${num2}`)
     num1 = parseFloat(num1)
     num2 = parseFloat(num2)
     console.log(`add: ${num1} ${num2}`)
     if (operator == "+") {
         addOn = true;
         displayAnswer = addNum(num1, num2);
+        console.log(displayAnswer)
     }
     else if (operator == "-") {
         subtractOn = true;
@@ -210,7 +210,8 @@ function determineDisplayAnswer() {
             setNum1(e)
         }
     }
-    workingAnswerField.innerHTML = parseFloat(displayAnswer);
+    //workingAnswerField.innerHTML = parseFloat(displayAnswer);
+    workingAnswerField.innerHTML = Number(displayAnswer).toLocaleString()
     //workingAnswerField.innerHTML = Number(workingAnswerField).toLocaleString()
 }
 
