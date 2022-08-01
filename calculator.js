@@ -262,7 +262,7 @@ function percentNum() {
         alert("You must enter a number first.")
     }
     else {
-        num1 = parseFloat(problemField.innerHTML)
+        //num1 = parseFloat(problemField.innerHTML)
         // percentButton.style.color = "rgb(4, 96, 235)";
         // problemField.innerHTML += percentButton.innerHTML
         problemField.innerHTML += "%";
