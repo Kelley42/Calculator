@@ -289,6 +289,7 @@ function squaredNum() {
         console.log(num1)
     }
     else if (num2on == true) { // working on num2
+        unsquaredNum = num2
         num2 *= num2;
         num2commas = num2;
         determineDisplayAnswer()
@@ -328,15 +329,26 @@ function backspaceNum() {
         num2commas = String(num2commas)
         console.log(num2)
         console.log(`num2commas:${num2commas}`)
+        // Remove percent or squared
+        if (problemField.innerHTML.slice(-1) == "%" || problemField.innerHTML.slice(-1) == "²") {
+            problemField.innerHTML = problemField.innerHTML.slice(0, -1)
+            if (num1on == true) {
+                workingAnswerField.innerHTML = num1commas
+            }
+            else if (num2on == true) {
+                num2 = unsquaredNum
+                determineDisplayAnswer()
+            }
+        }
         // Erase last symbol
-        if (num2commas.length == 1) { // If last digit
+        else if (num2commas.length == 1) { // If last digit
             num2commas = ""
             num2 = ""
             num2on = false 
         }
         else {
             num2commas = num2commas.slice(0, -1)
-
+            console.log(`newnum2commas:${num2commas}`)
             // Strip commas
             num2 = num2commas.replace(/\,/g, "") 
             num2commas = num2commas.replace(/\,/g, "")
@@ -551,5 +563,6 @@ let multiplyOn = false;
 let divideOn = false;
 let snapshotNum1; // before combining several numbers into num1
 let snapshotNum1On = false; // doing multiple operations
+let unsquaredNum;
 
 console.log(problemField.innerHTML.length)
