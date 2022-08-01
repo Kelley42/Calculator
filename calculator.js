@@ -309,6 +309,7 @@ function backspaceNum() {
             num1commas = ""
             num1 = ""
             num1on = false 
+            operateNumbers = false
             problemField.innerHTML = num1commas
             workingAnswerField.innerHTML = num1commas
         }
