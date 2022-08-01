@@ -263,7 +263,9 @@ function percentNum() {
     }
     else {
         num1 = parseFloat(problemField.innerHTML)
-        problemField.innerHTML += "%"
+        // percentButton.style.color = "rgb(4, 96, 235)";
+        // problemField.innerHTML += percentButton.innerHTML
+        problemField.innerHTML += "%";
         if (num2on == true) { // working on num2
             num2 /= 100;
             num2 *= num1;
@@ -271,7 +273,7 @@ function percentNum() {
             determineDisplayAnswer()
         }
         else { // working on num1
-            num1commas = num1 + "%"
+            num1commas = num1 + "%";
             num1 /= 100;
             displayAnswer = num1
             //num1commas = num1
@@ -288,6 +290,7 @@ function squaredNum() {
     else {
         num1 = parseFloat(problemField.innerHTML)
         problemField.innerHTML += "²"
+        console.log(problemField.innerHTML)
         if (num2on == true) { // working on num2
             unsquaredNum = num2
             num2 *= num2;
@@ -391,7 +394,7 @@ function backspaceNum() {
 }
 
 function showFinalAnswer() {
-    if (num2) { // Only works if num2 present
+    if (num2 || num1on == true) { // Will not work after just hitting operator
         // problemField.innerHTML = displayAnswer
         console.log(`displayAnswer: ${displayAnswer}`)
         console.log(`workingAnswerField: ${workingAnswerField.innerHTML}`)
@@ -580,6 +583,5 @@ let divideOn = false;
 let snapshotNum1; // before combining several numbers into num1
 let snapshotNum1On = false; // doing multiple operations
 let unsquaredNum;
-
 
 console.log(problemField.innerHTML.length)
