@@ -391,22 +391,24 @@ function backspaceNum() {
 }
 
 function showFinalAnswer() {
-    // problemField.innerHTML = displayAnswer
-    console.log(`displayAnswer: ${displayAnswer}`)
-    console.log(`workingAnswerField: ${workingAnswerField.innerHTML}`)
-    problemField.innerHTML = parseFloat(displayAnswer)
-    problemField.innerHTML = Number(problemField.innerHTML).toLocaleString() //show commas
-    if (problemField.innerHTML.length > 29) { // shrink font to fit
-        problemField.style.fontSize = "30px"
+    if (num2) { // Only works if num2 present
+        // problemField.innerHTML = displayAnswer
+        console.log(`displayAnswer: ${displayAnswer}`)
+        console.log(`workingAnswerField: ${workingAnswerField.innerHTML}`)
+        problemField.innerHTML = parseFloat(displayAnswer)
+        problemField.innerHTML = Number(problemField.innerHTML).toLocaleString() //show commas
+        if (problemField.innerHTML.length > 29) { // shrink font to fit
+            problemField.style.fontSize = "30px"
+        }
+
+        workingAnswerField.innerHTML = ""
+        num1 = displayAnswer;
+        num1commas = displayAnswer;
+        num2 = "";
+        operateNumbers = false;
+        num2on = false;
+        snapshotNum1On = false;
     }
-    
-    workingAnswerField.innerHTML = ""
-    num1 = displayAnswer;
-    num1commas = displayAnswer;
-    num2 = "";
-    operateNumbers = false;
-    num2on = false;
-    snapshotNum1On = false;
 }
 
 function clearInput() {
