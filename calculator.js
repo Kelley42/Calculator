@@ -68,6 +68,7 @@ function inputNum(e) {
         else if (operateNumbers == true) { //working on second num
             console.log("yep")
             console.log(num1)
+            console.log(num2)
             console.log(num2commas)
             inputSecondNum(e)
         }
@@ -119,6 +120,7 @@ function setNum1(e) {
 function inputSecondNum(e) {
     console.log("boop")
     console.log(num1)
+    console.log(num2)
     console.log(num2commas)
     num2on = true; // working on num2
     // Num2 already exists
@@ -201,6 +203,7 @@ function determineDisplayAnswer() {
     num1 = parseFloat(num1)
     num2 = parseFloat(num2)
     console.log(`add: ${num1} ${num2}`)
+    console.log(num1commas, num2commas)
     if (operator == "+") {
         addOn = true;
         displayAnswer = addNum(num1, num2);
@@ -216,11 +219,13 @@ function determineDisplayAnswer() {
     }
     else if (operator == "÷" || operator == "/") {
         divideOn = true;
+        console.log(num1, num2)
         displayAnswer = divideNum(num1, num2);
         console.log("divide")
-        if (num2 = 0) {
-            setNum1(e)
-        }
+        console.log(num2)
+        // if (num2 = 0) {
+        //     setNum1(e)
+        // }
     }
     //workingAnswerField.innerHTML = parseFloat(displayAnswer);
     workingAnswerField.innerHTML = Number(displayAnswer).toLocaleString()
@@ -253,6 +258,7 @@ function divideNum(num1, num2) {
         console.log("woot")
         console.log(num1)
         console.log(num2)
+        console.log(num1commas, num2commas)
         return num1 / num2;
     }
 }
