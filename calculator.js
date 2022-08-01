@@ -261,7 +261,13 @@ function percentNum() {
     console.log("booyah")
     num1 = parseFloat(problemField.innerHTML)
     problemField.innerHTML += "%"
-    if (num1on == true) { // working on num1
+    if (num2on == true) { // working on num2
+        num2 /= 100;
+        num2 *= num1;
+        num2commas = num2;
+        determineDisplayAnswer()
+    }
+    else { // working on num1
         num1commas = num1 + "%"
         num1 /= 100;
         displayAnswer = num1
@@ -269,30 +275,24 @@ function percentNum() {
         workingAnswerField.innerHTML = num1
         console.log(num1)
     }
-    else if (num2on == true) { // working on num2
-        num2 /= 100;
-        num2 *= num1;
-        num2commas = num2;
-        determineDisplayAnswer()
-    }
 }
 
 function squaredNum() {
     num1 = parseFloat(problemField.innerHTML)
     problemField.innerHTML += "²"
-    if (num1on == true) { // working on num1
+    if (num2on == true) { // working on num2
+        unsquaredNum = num2
+        num2 *= num2;
+        num2commas = num2;
+        determineDisplayAnswer()
+    }
+    else { // working on num1
         num1commas = num1 + "²"
         num1 *= num1;
         displayAnswer = num1
         //num1commas = num1
         workingAnswerField.innerHTML = num1
         console.log(num1)
-    }
-    else if (num2on == true) { // working on num2
-        unsquaredNum = num2
-        num2 *= num2;
-        num2commas = num2;
-        determineDisplayAnswer()
     }
 }
 
