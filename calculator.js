@@ -288,18 +288,20 @@ function squaredNum() {
         alert("You must enter a number first.")
     }
     else {
-        num1 = parseFloat(problemField.innerHTML)
+        //num1 = parseFloat(problemField.innerHTML)
         problemField.innerHTML += "²"
         console.log(problemField.innerHTML)
         if (num2on == true) { // working on num2
-            unsquaredNum = num2
+            unsquaredNum = num2 //saved in case backspace
             num2 *= num2;
             num2commas = num2;
+            console.log(num1, num1commas, num2, num2commas)
             determineDisplayAnswer()
         }
         else { // working on num1
             num1commas = num1 + "²"
             num1 *= num1;
+            console.log(num1)
             displayAnswer = num1
             //num1commas = num1
             workingAnswerField.innerHTML = num1
@@ -346,11 +348,13 @@ function backspaceNum() {
             // Remove percent or squared
             if (problemField.innerHTML.slice(-1) == "%" || problemField.innerHTML.slice(-1) == "²") {
                 problemField.innerHTML = problemField.innerHTML.slice(0, -1)
+                console.log("removed")
                 if (num1on == true) {
                     workingAnswerField.innerHTML = num1commas
                 }
                 else if (num2on == true) {
                     num2 = unsquaredNum
+                    num2commas = unsquaredNum
                     determineDisplayAnswer()
                 }
             }
