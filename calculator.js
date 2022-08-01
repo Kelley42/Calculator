@@ -425,7 +425,12 @@ function clearInput() {
 function addPosNeg() {
     if (!(num1) && num1on == false) { // haven't started typing digits
         console.log("woohoo")
-        problemField.innerHTML = "-"
+        if (problemField.innerHTML == "-") { // already has negative sign
+            problemField.innerHTML = ""
+        }
+        else {
+            problemField.innerHTML = "-"
+        }
     }
     else if (num1on == true) { // typing num1
         console.log("1on")
@@ -457,6 +462,7 @@ function addPosNeg() {
         determineDisplayAnswer()
     }
     else { // looking at final answer (already float)
+        console.log("negative")
         displayAnswer *= -1;
         problemField.innerHTML = displayAnswer;
     }
