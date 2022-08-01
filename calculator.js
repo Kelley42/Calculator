@@ -78,42 +78,35 @@ function inputNum(e) {
 // When operator is hit - sets first entry as num1, registers which operation
 function setNum1(e) {
     console.log("boopboop")
-    if(e.key) { //keyboard input
-        operator = e.key
+    // If num1 doesn't exist
+    if (!(num1)) {
+        alert("You must enter a number first.")
     }
-    else { //clicked input
-        operator = e.target.textContent
+    else {
+        if(e.key) { //keyboard input
+            operator = e.key
+        }
+        else { //clicked input
+            operator = e.target.textContent
+        }
+        num1 = parseFloat(num1)
+        num1on = false // done with num1
+        
+        if (operateNumbers == false) { // If first time being used
+            console.log("bye")
+            operateNumbers = true;
+            //num1 = parseFloat(problemField.innerHTML); // num1 is first num before operator
+        }
+        else { // Used instead of equals to calculate answer before doing more
+            snapshotNum1 = problemField.innerHTML
+            snapshotNum1On = true;
+            num1 = parseFloat(workingAnswerField.innerHTML)
+            num2 = "";
+        }
+        console.log(`num1:${num1}`)
+        console.log(operator)
+        problemField.innerHTML += `${operator}`
     }
-    num1 = parseFloat(num1)
-    num1on = false // done with num1
-    
-    // if (e.target.textContent) { // click event
-    //     console.log("?????")
-    //     operator = e.target.textContent // Set operation
-    // }
-    // else { // keydown event
-    //     operator = e.key
-    //     console.log(operator)
-    // }
-    
-    if (operateNumbers == false) { // If first time being used
-        console.log("bye")
-        operateNumbers = true;
-        //num1 = parseFloat(problemField.innerHTML); // num1 is first num before operator
-    }
-    else { // Used instead of equals to calculate answer before doing more
-        snapshotNum1 = problemField.innerHTML
-        snapshotNum1On = true;
-        num1 = parseFloat(workingAnswerField.innerHTML)
-        num2 = "";
-        // if (operator == "+") {
-        //     displayAnswer = addNum(num1, num2, operator);
-        // }
-        // workingAnswerField.innerHTML = displayAnswer;
-    }
-    console.log(`num1:${num1}`)
-    console.log(operator)
-    problemField.innerHTML += `${operator}`
 }
 
 // Gives second number
@@ -265,128 +258,136 @@ function divideNum(num1, num2) {
 
 function percentNum() {
     console.log("booyah")
-    num1 = parseFloat(problemField.innerHTML)
-    problemField.innerHTML += "%"
-    if (num2on == true) { // working on num2
-        num2 /= 100;
-        num2 *= num1;
-        num2commas = num2;
-        determineDisplayAnswer()
+    if (!(num1 || num2)) {
+        alert("You must enter a number first.")
     }
-    else { // working on num1
-        num1commas = num1 + "%"
-        num1 /= 100;
-        displayAnswer = num1
-        //num1commas = num1
-        workingAnswerField.innerHTML = num1
-        console.log(num1)
+    else {
+        num1 = parseFloat(problemField.innerHTML)
+        problemField.innerHTML += "%"
+        if (num2on == true) { // working on num2
+            num2 /= 100;
+            num2 *= num1;
+            num2commas = num2;
+            determineDisplayAnswer()
+        }
+        else { // working on num1
+            num1commas = num1 + "%"
+            num1 /= 100;
+            displayAnswer = num1
+            //num1commas = num1
+            workingAnswerField.innerHTML = num1
+            console.log(num1)
+        }
     }
 }
 
 function squaredNum() {
-    num1 = parseFloat(problemField.innerHTML)
-    problemField.innerHTML += "²"
-    if (num2on == true) { // working on num2
-        unsquaredNum = num2
-        num2 *= num2;
-        num2commas = num2;
-        determineDisplayAnswer()
+    if (!(num1 || num2)) {
+        alert("You must enter a number first.")
     }
-    else { // working on num1
-        num1commas = num1 + "²"
-        num1 *= num1;
-        displayAnswer = num1
-        //num1commas = num1
-        workingAnswerField.innerHTML = num1
-        console.log(num1)
+    else {
+        num1 = parseFloat(problemField.innerHTML)
+        problemField.innerHTML += "²"
+        if (num2on == true) { // working on num2
+            unsquaredNum = num2
+            num2 *= num2;
+            num2commas = num2;
+            determineDisplayAnswer()
+        }
+        else { // working on num1
+            num1commas = num1 + "²"
+            num1 *= num1;
+            displayAnswer = num1
+            //num1commas = num1
+            workingAnswerField.innerHTML = num1
+            console.log(num1)
+        }
     }
 }
 
 function backspaceNum() {
-    console.log(num1)
-    console.log("byeeeee")
-    console.log(num1commas)
-    if (num1on == true) { // typing num1
-        num1 = String(num1)
-        num1commas = String(num1commas)
-        // Erase last symbol
-        //num1 = num1commas.slice(0, -1)
-        if (num1commas.length == 1) { // If last digit
-            num1commas = ""
-            num1 = ""
-            num1on = false 
-            operateNumbers = false
-            problemField.innerHTML = num1commas
-            workingAnswerField.innerHTML = num1commas
-        }
-        else {
-            num1commas = num1commas.slice(0, -1)
-            // Strip commas
-            num1 = num1commas.replace(/\,/g, "") 
-            num1commas = num1commas.replace(/\,/g, "") 
-            // Convert num1commas to be formatted again
-            num1commas = Number(num1).toLocaleString()
-            problemField.innerHTML = num1commas
-            workingAnswerField.innerHTML = num1commas
-        }
-    }
-    else if (num2on == true) { // typing num2
-        console.log("2nd")
-        num2 = String(num2)
-        num2commas = String(num2commas)
-        console.log(num2)
-        console.log(`num2commas:${num2commas}`)
-        // Remove percent or squared
-        if (problemField.innerHTML.slice(-1) == "%" || problemField.innerHTML.slice(-1) == "²") {
-            problemField.innerHTML = problemField.innerHTML.slice(0, -1)
-            if (num1on == true) {
+    if (num1 || num2) {
+        console.log(num1)
+        console.log("byeeeee")
+        console.log(num1commas)
+        if (num1on == true) { // typing num1
+            num1 = String(num1)
+            num1commas = String(num1commas)
+            // Erase last symbol
+            //num1 = num1commas.slice(0, -1)
+            if (num1commas.length == 1) { // If last digit
+                num1commas = ""
+                num1 = ""
+                num1on = false 
+                operateNumbers = false
+                problemField.innerHTML = num1commas
                 workingAnswerField.innerHTML = num1commas
             }
-            else if (num2on == true) {
-                num2 = unsquaredNum
+            else {
+                num1commas = num1commas.slice(0, -1)
+                // Strip commas
+                num1 = num1commas.replace(/\,/g, "") 
+                num1commas = num1commas.replace(/\,/g, "") 
+                // Convert num1commas to be formatted again
+                num1commas = Number(num1).toLocaleString()
+                problemField.innerHTML = num1commas
+                workingAnswerField.innerHTML = num1commas
+            }
+        }
+        else if (num2on == true) { // typing num2
+            console.log("2nd")
+            num2 = String(num2)
+            num2commas = String(num2commas)
+            console.log(num2)
+            console.log(`num2commas:${num2commas}`)
+            // Remove percent or squared
+            if (problemField.innerHTML.slice(-1) == "%" || problemField.innerHTML.slice(-1) == "²") {
+                problemField.innerHTML = problemField.innerHTML.slice(0, -1)
+                if (num1on == true) {
+                    workingAnswerField.innerHTML = num1commas
+                }
+                else if (num2on == true) {
+                    num2 = unsquaredNum
+                    determineDisplayAnswer()
+                }
+            }
+            // Erase last symbol
+            else if (num2commas.length == 1) { // If last digit
+                num2commas = ""
+                num2 = ""
+                num2on = false 
+            }
+            else {
+                num2commas = num2commas.slice(0, -1)
+                console.log(`newnum2commas:${num2commas}`)
+                // Strip commas
+                num2 = num2commas.replace(/\,/g, "") 
+                num2commas = num2commas.replace(/\,/g, "")
+                console.log(num1commas, operator, num2commas)
+                // Reformat
+                num2commas = Number(num2).toLocaleString()
+                console.log(`num2commas: ${num2commas}`)
+                problemField.innerHTML = num1commas + operator + num2commas
+            }
+            // if erased all of num2
+            if(num2commas == "") {
+                console.log("empty")
+                workingAnswerField.innerHTML = num1commas
+                problemField.innerHTML = num1commas + operator
+            }
+            else{
+                console.log(`num2commasboop:${num2commas}`)
                 determineDisplayAnswer()
             }
         }
-        // Erase last symbol
-        else if (num2commas.length == 1) { // If last digit
-            num2commas = ""
-            num2 = ""
-            num2on = false 
-        }
-        else {
-            num2commas = num2commas.slice(0, -1)
-            console.log(`newnum2commas:${num2commas}`)
-            // Strip commas
-            num2 = num2commas.replace(/\,/g, "") 
-            num2commas = num2commas.replace(/\,/g, "")
-            console.log(num1commas, operator, num2commas)
-            // Reformat
-            num2commas = Number(num2).toLocaleString()
-            console.log(`num2commas: ${num2commas}`)
-            problemField.innerHTML = num1commas + operator + num2commas
-        }
-        // if erased all of num2
-        if(num2commas == "") {
-            console.log("empty")
-            workingAnswerField.innerHTML = num1commas
-            problemField.innerHTML = num1commas + operator
-        }
-        else{
-            console.log(`num2commasboop:${num2commas}`)
-            determineDisplayAnswer()
+        else { //typing operator
+            console.log("erase operator")
+            problemField.innerHTML = num1commas
+            console.log(num1)
+            console.log(num1commas)
+            num1on = true
         }
     }
-    else { //typing operator
-        console.log("erase operator")
-        problemField.innerHTML = num1commas
-        console.log(num1)
-        console.log(num1commas)
-        num1on = true
-
-    }
-    
-    // problemField.innerHTML = String(problemField.innerHTML.slice(0, -1))
-    
 }
 
 function showFinalAnswer() {
