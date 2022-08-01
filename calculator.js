@@ -581,4 +581,5 @@ let snapshotNum1; // before combining several numbers into num1
 let snapshotNum1On = false; // doing multiple operations
 let unsquaredNum;
 
+
 console.log(problemField.innerHTML.length)

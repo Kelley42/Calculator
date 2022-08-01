@@ -4,7 +4,8 @@ html {
     justify-content: center;
 }
 body {
-    background-color: rgb(217, 235, 247);
+    /*background-color: rgb(217, 235, 247);*/
+    background-color: rgb(240, 246, 252);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -82,7 +83,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(217, 235, 247);
+    /*background-color: rgb(217, 235, 247);*/
+    background-color: rgb(240, 246, 252);
+    color: rgb(4, 96, 235);
     /* margin-right: 10px; */
 }
 
@@ -125,7 +128,29 @@ body {
     border-radius: 50%;
     font-size: 2rem;
     max-width: 80px;
+    /*background-color: rgb(236, 234, 234);*/
+    background-color: rgb(229, 236, 240);
+    border: none;
 }
+
+#clear {
+    color: rgb(207, 3, 3);
+}
+
+#squared, 
+#percent,
+#division,
+#multiply,
+#minus,
+#plus {
+    color: rgb(4, 96, 235);
+}
+
+#equals {
+    background-color: rgb(53, 126, 236);
+    color: white;
+}
+
 @media (min-width: 1200px) {
     .button-row {
         height: 10vh;
