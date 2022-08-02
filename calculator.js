@@ -389,9 +389,18 @@ function backspaceNum() {
                 // Reformat
                 num2commas = Number(num2).toLocaleString()
                 console.log(`num2commas: ${num2commas}`)
+                console.log(num1commas)
                 console.log(`here: ${snapshotNum1, operator, num2commas}`)
                 //problemField.innerHTML = num1commas + operator + num2commas
-                problemField.innerHTML = snapshotNum1 + operator + num2commas
+                console.log(multipleOperations)
+                console.log(snapshotNum1)
+                console.log(snapshotNum1On)
+                if (snapshotNum1 && snapshotNum1On == true) {
+                    problemField.innerHTML = snapshotNum1 + operator + num2commas
+                }
+                else {
+                    problemField.innerHTML = num1commas + operator + num2commas
+                }
             }
             // if erased all of num2
             if(num2commas == "") {
@@ -432,7 +441,11 @@ function backspaceNum() {
                     operatorIndex = i
                     num1commas = problemField.innerHTML.slice(0, i)
                     num2commas = problemField.innerHTML.slice(i+1, problemField.innerHTML.length)
+                    num1 = num1commas.replace(/\,/g, "")
+                    num2 = num2commas.replace(/\,/g, "")
+                    console.log(num1, num2)
                     multipleOperations = true
+                    //operateNumbers = false
                     num2on = true //will be working on num2
                     break;
                 }
@@ -451,8 +464,8 @@ function backspaceNum() {
                 console.log(`c: ${operator}`)
                 console.log(num1commas)
                 console.log(num2commas)
-                num1 = parseFloat(num1commas)
-                num2 = parseFloat(num2commas)
+                //num1 = parseFloat(num1commas)
+                //num2 = parseFloat(num2commas)
                 console.log(num1, operator, num2)
                 //determineDisplayAnswer()
             }
