@@ -441,8 +441,8 @@ function backspaceNum() {
                     operatorIndex = i
                     num1commas = problemField.innerHTML.slice(0, i)
                     num2commas = problemField.innerHTML.slice(i+1, problemField.innerHTML.length)
-                    num1 = num1commas.replace(/\,/g, "")
-                    num2 = num2commas.replace(/\,/g, "")
+                    num1 = parseFloat(num1commas.replace(/\,/g, ""))
+                    num2 = parseFloat(num2commas.replace(/\,/g, ""))
                     console.log(num1, num2)
                     multipleOperations = true
                     //operateNumbers = false
