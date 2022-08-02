@@ -63,6 +63,7 @@ function inputNum(e) {
             // num1 = parseFloat(problemField.innerHTML)
             console.log(num1commas)
             problemField.innerHTML = num1commas
+            workingAnswerField.innerHTML = num1commas
         
         }
         else if (operateNumbers == true) { //working on second num
@@ -326,6 +327,7 @@ function backspaceNum() {
             // Erase last symbol
             //num1 = num1commas.slice(0, -1)
             if (num1commas.length == 1) { // If last digit
+                console.log("length1")
                 num1commas = ""
                 num1 = ""
                 num1on = false 
@@ -399,6 +401,7 @@ function backspaceNum() {
                 //problemField.innerHTML = num1commas + operator
                 //problemField.innerHTML = snapshotNum1 + operator
                 problemField.innerHTML = problemField.innerHTML.slice(0, -1)
+                snapshotNum1On = false
             }
             else{
                 console.log(`num2commasboop:${num2commas}`)
@@ -437,6 +440,7 @@ function backspaceNum() {
                 //problemField.innerHTML = snapshotNum1
                 problemField.innerHTML = num1commas
                 num1on = true
+                operateNumbers = false
                 console.log(num1)
                 console.log(num1commas)
                 workingAnswerField.innerHTML = Number(num1).toLocaleString()
@@ -448,7 +452,7 @@ function backspaceNum() {
                 num1 = parseFloat(num1commas)
                 num2 = parseFloat(num2commas)
                 console.log(num1, operator, num2)
-                determineDisplayAnswer()
+                //determineDisplayAnswer()
             }
         }
     }
