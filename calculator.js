@@ -99,6 +99,7 @@ function setNum1(e) {
         }
         else { // Used instead of equals to calculate answer before doing more
             snapshotNum1 = problemField.innerHTML
+            num1commas = snapshotNum1
             snapshotNum1On = true;
             num1 = parseFloat(workingAnswerField.innerHTML)
             num2 = "";
@@ -313,9 +314,13 @@ function squaredNum() {
 function backspaceNum() {
     if (num1 || num2) {
         console.log(num1)
+        console.log(snapshotNum1)
         console.log("byeeeee")
         console.log(num1commas)
+        console.log(num1, operator, num2)
         if (num1on == true) { // typing num1
+            console.log(`trythis:${num1commas} ${operator} ${num2commas}`)
+            console.log(`trythis:${num1} ${operator} ${num2}`)
             num1 = String(num1)
             num1commas = String(num1commas)
             // Erase last symbol
@@ -360,11 +365,17 @@ function backspaceNum() {
             }
             // Erase last symbol
             else if (num2commas.length == 1) { // If last digit
+                console.log("erase last digit")
                 num2commas = ""
                 num2 = ""
                 num2on = false 
+                console.log(num1commas)
+                console.log(operator)
+                console.log(num2)
+                console.log(snapshotNum1)
             }
             else {
+                console.log("not last digit")
                 num2commas = num2commas.slice(0, -1)
                 console.log(`newnum2commas:${num2commas}`)
                 // Strip commas
@@ -374,13 +385,20 @@ function backspaceNum() {
                 // Reformat
                 num2commas = Number(num2).toLocaleString()
                 console.log(`num2commas: ${num2commas}`)
-                problemField.innerHTML = num1commas + operator + num2commas
+                console.log(`here: ${snapshotNum1, operator, num2commas}`)
+                //problemField.innerHTML = num1commas + operator + num2commas
+                problemField.innerHTML = snapshotNum1 + operator + num2commas
             }
             // if erased all of num2
             if(num2commas == "") {
                 console.log("empty")
+                console.log(num1commas)
+                //snapshotNum1 = num1commas
+                console.log(snapshotNum1)
                 workingAnswerField.innerHTML = num1commas
-                problemField.innerHTML = num1commas + operator
+                //problemField.innerHTML = num1commas + operator
+                //problemField.innerHTML = snapshotNum1 + operator
+                problemField.innerHTML = problemField.innerHTML.slice(0, -1)
             }
             else{
                 console.log(`num2commasboop:${num2commas}`)
@@ -389,10 +407,43 @@ function backspaceNum() {
         }
         else { //typing operator
             console.log("erase operator")
-            problemField.innerHTML = num1commas
+            //problemField.innerHTML = num1commas
+            console.log(snapshotNum1)
+            //problemField.innerHTML = snapshotNum1
+            problemField.innerHTML = problemField.innerHTML.slice(0, -1)
             console.log(num1)
             console.log(num1commas)
-            num1on = true
+            console.log(num2commas)
+            //num1on = true
+            // If multiple operators were present
+            // Separate snapshotNum back into num1 and num2
+            let operatorIndex;
+            //let multipleOperations = false
+            for (let i = problemField.innerHTML.length-1; i >= 0; i--) {
+                let c = problemField.innerHTML.charAt(i);
+                if (c == "+" || c == "-" || c == "x" || c == "/") {
+                    console.log("slice")
+                    operator = c;
+                    operatorIndex = i
+                    num1commas = problemField.innerHTML.slice(0, i)
+                    num2commas = problemField.innerHTML.slice(i+1, problemField.innerHTML.length)
+                    multipleOperations = true
+                    num2on = true //will be working on num2
+                    break;
+                }
+            }
+            if (multipleOperations == false) { //only num1 left
+                console.log("1operation")
+                //problemField.innerHTML = snapshotNum1
+                problemField.innerHTML = num1commas
+                num1on = true
+            }
+            console.log(`c: ${operator}`)
+            console.log(num1commas)
+            console.log(num2commas)
+            num1 = parseFloat(num1commas)
+            num2 = parseFloat(num2commas)
+            console.log(num1, operator, num2)
         }
     }
 }
@@ -587,5 +638,6 @@ let divideOn = false;
 let snapshotNum1; // before combining several numbers into num1
 let snapshotNum1On = false; // doing multiple operations
 let unsquaredNum;
+let multipleOperations = false;
 
 console.log(problemField.innerHTML.length)
