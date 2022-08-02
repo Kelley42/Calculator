@@ -90,6 +90,7 @@ function setNum1(e) {
         else { //clicked input
             operator = e.target.textContent
         }
+        console.log(num1)
         num1 = parseFloat(num1)
         num1on = false // done with num1
         
@@ -102,7 +103,8 @@ function setNum1(e) {
             snapshotNum1 = problemField.innerHTML
             num1commas = snapshotNum1
             snapshotNum1On = true;
-            num1 = parseFloat(workingAnswerField.innerHTML)
+            num1 = displayAnswer
+            //num1 = parseFloat(workingAnswerField.innerHTML)
             num2 = "";
         }
         console.log(`num1:${num1}`)
