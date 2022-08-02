@@ -395,7 +395,7 @@ function backspaceNum() {
                 console.log(num1commas)
                 //snapshotNum1 = num1commas
                 console.log(snapshotNum1)
-                workingAnswerField.innerHTML = num1commas
+                workingAnswerField.innerHTML = Number(num1).toLocaleString()
                 //problemField.innerHTML = num1commas + operator
                 //problemField.innerHTML = snapshotNum1 + operator
                 problemField.innerHTML = problemField.innerHTML.slice(0, -1)
@@ -416,9 +416,9 @@ function backspaceNum() {
             console.log(num2commas)
             //num1on = true
             // If multiple operators were present
-            // Separate snapshotNum back into num1 and num2
+            // Separate back into num1 and num2
             let operatorIndex;
-            //let multipleOperations = false
+            multipleOperations = false
             for (let i = problemField.innerHTML.length-1; i >= 0; i--) {
                 let c = problemField.innerHTML.charAt(i);
                 if (c == "+" || c == "-" || c == "x" || c == "/") {
@@ -437,13 +437,19 @@ function backspaceNum() {
                 //problemField.innerHTML = snapshotNum1
                 problemField.innerHTML = num1commas
                 num1on = true
+                console.log(num1)
+                console.log(num1commas)
+                workingAnswerField.innerHTML = Number(num1).toLocaleString()
             }
-            console.log(`c: ${operator}`)
-            console.log(num1commas)
-            console.log(num2commas)
-            num1 = parseFloat(num1commas)
-            num2 = parseFloat(num2commas)
-            console.log(num1, operator, num2)
+            else {
+                console.log(`c: ${operator}`)
+                console.log(num1commas)
+                console.log(num2commas)
+                num1 = parseFloat(num1commas)
+                num2 = parseFloat(num2commas)
+                console.log(num1, operator, num2)
+                determineDisplayAnswer()
+            }
         }
     }
 }
