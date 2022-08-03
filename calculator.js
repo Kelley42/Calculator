@@ -93,6 +93,7 @@ function setNum1(e) {
         console.log(num1)
         num1 = parseFloat(num1)
         num1on = false // done with num1
+        num2on = false // not on num2 yet
         
         if (operateNumbers == false) { // If first time being used
             console.log("bye")
@@ -271,6 +272,7 @@ function percentNum() {
         // problemField.innerHTML += percentButton.innerHTML
         problemField.innerHTML += "%";
         if (num2on == true) { // working on num2
+            unpercentNum2 = num2
             num2 /= 100;
             num2 *= num1;
             num2commas = num2;
@@ -278,6 +280,7 @@ function percentNum() {
         }
         else { // working on num1
             num1commas = num1 + "%";
+            unsquaredNum1 = num1
             num1 /= 100;
             displayAnswer = num1
             //num1commas = num1
@@ -296,17 +299,20 @@ function squaredNum() {
         problemField.innerHTML += "²"
         console.log(problemField.innerHTML)
         if (num2on == true) { // working on num2
-            unsquaredNum = num2 //saved in case backspace
+            unsquaredNum2 = num2 //saved in case backspace
             num2 *= num2;
+            squaredSum2 = num2;
             num2commas = num2;
             console.log(num1, num1commas, num2, num2commas)
             determineDisplayAnswer()
         }
         else { // working on num1
             num1commas = num1 + "²"
+            unsquaredNum1 = num1
             num1 *= num1;
             console.log(num1)
             displayAnswer = num1
+            squaredSum1 = num1
             //num1commas = num1
             workingAnswerField.innerHTML = num1
             console.log(num1)
@@ -321,6 +327,7 @@ function backspaceNum() {
         console.log("byeeeee")
         console.log(num1commas)
         console.log(num1, operator, num2)
+        console.log(num2commas)
         if (num1on == true) { // typing num1
             console.log(`trythis:${num1commas} ${operator} ${num2commas}`)
             console.log(`trythis:${num1} ${operator} ${num2}`)
@@ -355,15 +362,32 @@ function backspaceNum() {
             console.log(num2)
             console.log(`num2commas:${num2commas}`)
             // Remove percent or squared
-            if (problemField.innerHTML.slice(-1) == "%" || problemField.innerHTML.slice(-1) == "²") {
+            if (problemField.innerHTML.slice(-1) == "%") {
                 problemField.innerHTML = problemField.innerHTML.slice(0, -1)
                 console.log("removed")
                 if (num1on == true) {
+                    num1 = unpercentNum1
                     workingAnswerField.innerHTML = num1commas
                 }
                 else if (num2on == true) {
-                    num2 = unsquaredNum
-                    num2commas = unsquaredNum
+                    num2 = unpercentNum2
+                    num2commas = unpercentNum2
+                    determineDisplayAnswer()
+                }
+            }
+            else if (problemField.innerHTML.slice(-1) == "²") {
+                problemField.innerHTML = problemField.innerHTML.slice(0, -1)
+                console.log("removed")
+                if (num1on == true) {
+                    num1 = unsquaredNum1
+                    workingAnswerField.innerHTML = num1commas
+                }
+                else if (num2on == true) {
+                    console.log("removeit")
+                    num2 = unsquaredNum2
+                    num2commas = unsquaredNum2
+                    //num1 = squaredSum
+                    console.log(num1, num2)
                     determineDisplayAnswer()
                 }
             }
@@ -444,6 +468,7 @@ function backspaceNum() {
                     num1 = parseFloat(num1commas.replace(/\,/g, ""))
                     num2 = parseFloat(num2commas.replace(/\,/g, ""))
                     console.log(num1, num2)
+                    console.log(num1commas, num2commas)
                     multipleOperations = true
                     //operateNumbers = false
                     num2on = true //will be working on num2
@@ -455,9 +480,11 @@ function backspaceNum() {
                 //problemField.innerHTML = snapshotNum1
                 problemField.innerHTML = num1commas
                 num1on = true
+                num2on = false
                 operateNumbers = false
                 console.log(num1)
                 console.log(num1commas)
+                //num1 = squaredSum
                 workingAnswerField.innerHTML = Number(num1).toLocaleString()
             }
             else {
@@ -468,6 +495,13 @@ function backspaceNum() {
                 //num2 = parseFloat(num2commas)
                 console.log(num1, operator, num2)
                 //determineDisplayAnswer()
+                if (unsquaredNum1) {
+                    num1 = squaredSum1
+                }
+                if (unsquaredNum2) {
+                    num2 = squaredSum2
+                }
+                //workingAnswerField.innerHTML = determineDisplayAnswer()
             }
         }
     }
@@ -662,7 +696,12 @@ let multiplyOn = false;
 let divideOn = false;
 let snapshotNum1; // before combining several numbers into num1
 let snapshotNum1On = false; // doing multiple operations
-let unsquaredNum;
+let unsquaredNum1; // num1 before squaring
+let unsquaredNum2; // num2 before squaring
+let squaredSum1; // save answer in case backspace
+let squaredSum2;
+let unpercentNum1; // num1 before percenting
+let unpercentNum2; // num2 before percenting
 let multipleOperations = false;
 
 console.log(problemField.innerHTML.length)
