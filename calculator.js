@@ -554,11 +554,13 @@ function addPosNeg() {
     else if (num1on == true) { // typing num1
         console.log("1on")
         console.log(num1)
-        num1 = parseFloat(problemField.innerHTML)
+        //num1 = parseFloat(problemField.innerHTML)
         num1 *= -1 
-        problemField.innerHTML = num1
+        num1commas = Number(num1).toLocaleString()
+        problemField.innerHTML = num1commas
     }
     else if (num2on == true) { // typing num2
+        console.log("neg on second")
         if (!(num2) || num2 == "") { // num2 doesn't exist
             num2 = "-"
             problemField.innerHTML += num2
@@ -580,10 +582,17 @@ function addPosNeg() {
         }
         determineDisplayAnswer()
     }
+    else if (!(num2) && num2on == false) { // start typing nun2 as neg
+        console.log("start neg")
+        num2 = "-"
+        problemField.innerHTML += num2
+    }
     else { // looking at final answer (already float)
         console.log("negative")
         displayAnswer *= -1;
-        problemField.innerHTML = displayAnswer;
+        problemField.innerHTML = Number(displayAnswer).toLocaleString();
+        num1 = displayAnswer
+        num1commas = problemField.innerHTML
     }
     
 }
