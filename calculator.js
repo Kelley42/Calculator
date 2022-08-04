@@ -570,14 +570,15 @@ function addPosNeg() {
             console.log("WHAAAAAAAT")
             num2 = parseFloat(num2)
             num2 *= -1 
+            num2commas = Number(num2).toLocaleString()
             console.log(snapshotNum1)
             if (snapshotNum1) { // more than 2 nums being operated
                 console.log("long")
                 snapshotNum1 += operator // add last operator
-                problemField.innerHTML = snapshotNum1 + num2
+                problemField.innerHTML = snapshotNum1 + num2commas
             }
             else {
-                problemField.innerHTML = num1+operator+num2
+                problemField.innerHTML = num1commas+operator+num2commas
             }
         }
         determineDisplayAnswer()
