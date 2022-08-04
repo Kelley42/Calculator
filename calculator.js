@@ -244,31 +244,21 @@ function backspaceNum() {
             // Remove percent or squared
             if (problemField.innerHTML.slice(-1) == "%") {
                 problemField.innerHTML = problemField.innerHTML.slice(0, -1);
-                if (num1on == true) {
-                    num1 = unpercentNum1;
-                    workingAnswerField.innerHTML = num1commas;
+                num2 = unpercentNum2;
+                num2commas = unpercentNum2;
+                if (percentNum1on == true) {
+                    num1 = percentNum1;
                 }
-                else if (num2on == true) {
-                    num2 = unpercentNum2;
-                    num2commas = unpercentNum2;
-                    if (percentNum1on == true) {
-                        num1 = percentNum1;
-                    }
-                    console.log(num1, num2)
-                    determineDisplayAnswer();
-                }
+                determineDisplayAnswer();
             }
             else if (problemField.innerHTML.slice(-1) == "²") {
                 problemField.innerHTML = problemField.innerHTML.slice(0, -1);
-                if (num1on == true) {
-                    num1 = unsquaredNum1;
-                    workingAnswerField.innerHTML = num1commas;
+                num2 = unsquaredNum2;
+                num2commas = unsquaredNum2;
+                if (percentNum1on == true) {
+                    num1 = percentNum1;
                 }
-                else if (num2on == true) {
-                    num2 = unsquaredNum2;
-                    num2commas = unsquaredNum2;
-                    determineDisplayAnswer();
-                }
+                determineDisplayAnswer();
             }
             // Erase last symbol
             else if (num2commas.length == 1) { // If last digit
@@ -296,7 +286,10 @@ function backspaceNum() {
                 problemField.innerHTML = problemField.innerHTML.slice(0, -1);
                 snapshotNum1On = false;
             }
-            else{
+            else {
+                if (percentNum1on == true) {
+                    num1 = percentNum1;
+                }
                 determineDisplayAnswer();
             }
         }
@@ -333,6 +326,9 @@ function backspaceNum() {
                 }
                 if (unsquaredNum2) {
                     num2 = squaredSum2;
+                }
+                if (percentNum1on == true) {
+                    num1 = percentNum1;
                 }
             }
         }
