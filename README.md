@@ -39,5 +39,6 @@ I also wanted to allow order of operations. For now, it only solves the problem 
 #### Live demo:
 https://kelley42.github.io/Calculator/
 
+![calculator screenshot](calculatorscreenshot.jpg)
 <img src="calculatorscreenshot.png" alt="calculator screenshot">
 
