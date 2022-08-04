@@ -249,6 +249,9 @@ function backspaceNum() {
                 if (percentNum1on == true) {
                     num1 = percentNum1;
                 }
+                if (unsquaredNum1) {
+                    num1 = squaredSum1;
+                }
                 determineDisplayAnswer();
             }
             else if (problemField.innerHTML.slice(-1) == "²") {
@@ -257,6 +260,9 @@ function backspaceNum() {
                 num2commas = unsquaredNum2;
                 if (percentNum1on == true) {
                     num1 = percentNum1;
+                }
+                if (unsquaredNum1) {
+                    num1 = squaredSum1;
                 }
                 determineDisplayAnswer();
             }
