@@ -40,5 +40,5 @@ I also wanted to allow order of operations. For now, it only solves the problem 
 https://kelley42.github.io/Calculator/
 
 ![calculator screenshot](Calculator/calculatorscreenshot.png)
-<img src="Calculator/calculatorscreenshot.png" alt="calculator screenshot">
+<img src="Calculator/calculatorscreenshot.png" alt="calculator screenshot"/>
 
