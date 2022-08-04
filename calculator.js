@@ -179,9 +179,11 @@ function percentNum() {
         }
         else { // working on num1
             num1commas = num1 + "%";
-            unsquaredNum1 = num1;
+            unpercentNum1 = num1;
             num1 /= 100;
             displayAnswer = num1;
+            percentNum1on = true;
+            percentNum1 = num1;
             workingAnswerField.innerHTML = num1;
         }
     }
@@ -249,6 +251,10 @@ function backspaceNum() {
                 else if (num2on == true) {
                     num2 = unpercentNum2;
                     num2commas = unpercentNum2;
+                    if (percentNum1on == true) {
+                        num1 = percentNum1;
+                    }
+                    console.log(num1, num2)
                     determineDisplayAnswer();
                 }
             }
@@ -483,8 +489,10 @@ let snapshotNum1; // before combining several numbers into num1
 let snapshotNum1On = false; // doing multiple operations
 let unsquaredNum1; // num1 before squaring
 let unsquaredNum2; // num2 before squaring
-let squaredSum1; // save  squared answer of num1 in case backspace
-let squaredSum2; // save  squared answer of num2 in case backspace
+let squaredSum1; // save squared answer of num1 in case backspace
+let squaredSum2; // save squared answer of num2 in case backspace
 let unpercentNum1; // num1 before percenting
 let unpercentNum2; // num2 before percenting
+let percentNum1; // save percent num1 in case backspace
+let percentNum1on = false; // if num1 was percent
 let multipleOperations = false; // problem has multiple operator signs
