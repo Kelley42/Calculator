@@ -220,13 +220,7 @@ function backspaceNum() {
             num1commas = String(num1commas);
             // Erase last symbol
             if (num1commas.length == 1) { // If last digit
-                num1commas = "";
-                num1 = "";
-                num1on = false; 
-                console.log(num1, num1commas)
-                operateNumbers = false;
-                problemField.innerHTML = num1commas;
-                workingAnswerField.innerHTML = num1commas;
+                clearInput()
             }
             else {
                 num1commas = num1commas.slice(0, -1);
@@ -382,11 +376,19 @@ function clearInput() {
     workingAnswerField.innerHTML = "";
     displayAnswer = "";
     num1 = "";
+    num1commas = "";
     num2 = "";
+    num2commas = "";
     operator = "";
     operateNumbers = false;
+    num1on = false;
     num2on = false;
     snapshotNum1On = false;
+    addOn = false;
+    subtractOn = false;
+    multiplyOn = false;
+    divideOn = false;
+    percentNum1on = false;
 }
 
 function addPosNeg() {
