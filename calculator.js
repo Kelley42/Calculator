@@ -18,15 +18,19 @@ function inputNum(e) {
             num1on = true;
             // If input is decimal
             if (e.target.value == "." || e.key == ".") { 
-                // Decimal after digit
-                if (num1on = true) {
-                    num1 += ".";
-                    num1commas += ".";
-                }
-                // Decimal is first input - show 0 before decimal
-                else { 
-                    num1 = "0.";
-                    num1commas += "0.";
+                if (decimalOn == false) { // if decimal not already used
+                    // Decimal after digit
+                    if (num1on = true) {
+                        num1 += ".";
+                        num1commas += ".";
+                        decimalOn = true;
+                    }
+                    // Decimal is first input - show 0 before decimal
+                    else { 
+                        num1 = "0.";
+                        num1commas += "0.";
+                        decimalOn = true;
+                    }
                 }
             }
             // Input is digit
@@ -60,6 +64,7 @@ function setNum1(e) {
         num1 = parseFloat(num1);
         num1on = false; // done with num1
         num2on = false; // not on num2 yet
+        decimalOn = false;
         
         if (operateNumbers == false) { // If first time being used
             operateNumbers = true;
@@ -82,8 +87,11 @@ function inputSecondNum(e) {
     if (num2) { //double or triple digit number or decimal
         // Input is decimal
         if (e.target.value == "." || e.key == ".") { 
-            num2 += ".";
-            num2commas += ".";
+            if (decimalOn == false) { // if decimal not already used
+                num2 += ".";
+                num2commas += ".";
+                decimalOn = true;
+            }
         }
         // Input is digit
         else { 
@@ -389,6 +397,7 @@ function clearInput() {
     multiplyOn = false;
     divideOn = false;
     percentNum1on = false;
+    decimalOn = false;
 }
 
 function addPosNeg() {
@@ -518,3 +527,5 @@ let unpercentNum2; // num2 before percenting
 let percentNum1; // save percent num1 in case backspace
 let percentNum1on = false; // if num1 was percent
 let multipleOperations = false; // problem has multiple operator signs
+let decimalOn = false; // if decimal already used in number
+let percentOn = false; // if percent already used in number
