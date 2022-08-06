@@ -90,7 +90,6 @@ function inputSecondNum(e) {
                 num2 += ".";
                 num2commas += ".";
             }
-            
         }
         // Input is digit
         else { 
@@ -456,6 +455,7 @@ function addPosNeg() {
         num1commas = problemField.innerHTML;
     }
 }
+
 
 
 // Query selectors for top part
