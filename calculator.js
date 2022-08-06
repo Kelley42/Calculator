@@ -65,7 +65,7 @@ function setNum1(e) {
         num1on = false; // done with num1
         num2on = false; // not on num2 yet
         decimalOn = false;
-        
+        percentOn = false;
         if (operateNumbers == false) { // If first time being used
             operateNumbers = true;
         }
@@ -177,22 +177,25 @@ function percentNum() {
         alert("You must enter a number first.");
     }
     else {
-        problemField.innerHTML += "%";
-        if (num2on == true) { // working on num2
-            unpercentNum2 = num2;
-            num2 /= 100;
-            num2 *= num1;
-            num2commas = num2;
-            determineDisplayAnswer();
-        }
-        else { // working on num1
-            num1commas = num1 + "%";
-            unpercentNum1 = num1;
-            num1 /= 100;
-            displayAnswer = num1;
-            percentNum1on = true;
-            percentNum1 = num1;
-            workingAnswerField.innerHTML = num1;
+        if (percentOn == false) {
+            problemField.innerHTML += "%";
+            percentOn = true;
+            if (num2on == true) { // working on num2
+                unpercentNum2 = num2;
+                num2 /= 100;
+                num2 *= num1;
+                num2commas = num2;
+                determineDisplayAnswer();
+            }
+            else { // working on num1
+                num1commas = num1 + "%";
+                unpercentNum1 = num1;
+                num1 /= 100;
+                displayAnswer = num1;
+                percentNum1on = true;
+                percentNum1 = num1;
+                workingAnswerField.innerHTML = num1;
+            }
         }
     }
 }
@@ -398,6 +401,7 @@ function clearInput() {
     divideOn = false;
     percentNum1on = false;
     decimalOn = false;
+    percentOn = false;
 }
 
 function addPosNeg() {
