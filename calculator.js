@@ -19,17 +19,15 @@ function inputNum(e) {
             // If input is decimal
             if (e.target.value == "." || e.key == ".") { 
                 if (decimalOn == false) { // if decimal not already used
-                    // Decimal after digit
-                    if (num1on = true) {
+                    decimalOn = true;
+                    // Decimal is first input - show 0 before decimal
+                    if (num1 = ".") {
+                        num1 = "0.";
+                        num1commas = "0.";
+                    }
+                    else { // Decimal after digit
                         num1 += ".";
                         num1commas += ".";
-                        decimalOn = true;
-                    }
-                    // Decimal is first input - show 0 before decimal
-                    else { 
-                        num1 = "0.";
-                        num1commas += "0.";
-                        decimalOn = true;
                     }
                 }
             }
@@ -88,10 +86,11 @@ function inputSecondNum(e) {
         // Input is decimal
         if (e.target.value == "." || e.key == ".") { 
             if (decimalOn == false) { // if decimal not already used
+                decimalOn = true;
                 num2 += ".";
                 num2commas += ".";
-                decimalOn = true;
             }
+            
         }
         // Input is digit
         else { 
@@ -105,8 +104,11 @@ function inputSecondNum(e) {
     else {
         // Decimal first - put 0 in front
         if (e.target.value == "." || e.key == ".") { 
-            num2 = "0.";
-            num2commas += "0.";
+            if (decimalOn == false) {
+                decimalOn = true;
+                num2 = "0.";
+                num2commas = "0.";
+            }
         }
         // Digit first
         else {
