@@ -125,7 +125,8 @@ body {
     max-width: 370px;
 }
 
-.btn {
+.btn,
+.btn:active {
     width: 20vw;
     height: 10vh;
     border-radius: 50%;
@@ -168,5 +169,8 @@ body {
     .btn {
         max-width: 60px;
         max-height: 100px;
+    }
+    .btn:hover {
+        background-color: rgb(201, 208, 212);
     }
 }
