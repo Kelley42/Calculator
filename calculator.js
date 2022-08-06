@@ -226,6 +226,12 @@ function squaredNum() {
 
 function backspaceNum() {
     if (num1 || num2) {
+        if (problemField.innerHTML.slice(-1) == ".") {
+            decimalOn = false;
+        }
+        if (problemField.innerHTML.slice(-1) == "%") {
+            percentOn = false;
+        }
         if (num1on == true) { // typing num1
             num1 = String(num1);
             num1commas = String(num1commas);
