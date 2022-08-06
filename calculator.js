@@ -133,44 +133,29 @@ function determineDisplayAnswer() {
     num2 = parseFloat(num2);
     if (operator == "+") {
         addOn = true;
-        displayAnswer = addNum(num1, num2);
+        // displayAnswer = addNum(num1, num2);
+        displayAnswer = num1 + num2;
     }
     else if (operator == "-") {
         subtractOn = true;
-        displayAnswer = subtractNum(num1, num2);
+        displayAnswer = num1 - num2;
     }
     else if (operator == "x" || operator == "*") {
         multiplyOn = true;
-        displayAnswer = multiplyNum(num1, num2);
+        displayAnswer = num1 * num2;
     }
     else if (operator == "÷" || operator == "/") {
         divideOn = true;
-        displayAnswer = divideNum(num1, num2);
+        if (num2 == 0) {
+            alert("Can't divide by zero");
+            problemField.innerHTML = problemField.innerHTML.slice(0, -1);
+            displayAnswer = "";
+        }
+        else {
+            displayAnswer = num1 / num2;
+        }
     }
     workingAnswerField.innerHTML = Number(displayAnswer).toLocaleString();
-}
-
-function addNum(num1, num2) {
-    return num1 + num2;
-}
-
-function subtractNum(num1, num2) {
-    return num1 - num2;
-}
-
-function multiplyNum(num1, num2) {
-    return num1 * num2;
-}
-
-function divideNum(num1, num2) {
-    if (num2 == 0) {
-        alert("Can't divide by zero");
-        problemField.innerHTML = problemField.innerHTML.slice(0, -1);
-        return "";
-    }
-    else {
-        return num1 / num2;
-    }
 }
 
 function percentNum() {
