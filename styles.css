@@ -136,8 +136,14 @@ body {
     border: none;
 }
 
-.btn:hover,
+/* .btn:focus {
+    background-color: blue;
+}
 .btn:active {
+    background-color: red;
+} */
+
+.btn:hover {
     background-color: rgb(201, 208, 212);
 }
 
