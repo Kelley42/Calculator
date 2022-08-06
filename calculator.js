@@ -239,7 +239,6 @@ function backspaceNum() {
                 }
                 problemField.innerHTML = num1commas;
                 workingAnswerField.innerHTML = num1commas;
-                
             }
         }
         else if (num2on == true) { // typing num2
@@ -277,25 +276,20 @@ function backspaceNum() {
                 num2on = false;
             }
             else {
-                console.log("here")
                 num2commas = num2commas.slice(0, -1);
                 // Strip commas
                 num2 = num2commas.replace(/\,/g, "");
                 num2commas = num2commas.replace(/\,/g, "");
                 // Reformat
                 num2commas = Number(num2).toLocaleString();
-                
                 if (snapshotNum1 && snapshotNum1On == true) {
                     problemField.innerHTML = snapshotNum1 + operator + num2commas;
                 }
                 else {
                     if (num2 == "-") {
-                        console.log("minus")
                         num2commas = num2
-                        console.log(num1commas)
                         workingAnswerField.innerHTML = num1commas
                     }
-                    console.log(workingAnswerField.innerHTML)
                     problemField.innerHTML = num1commas + operator + num2commas;
                 }
             }
